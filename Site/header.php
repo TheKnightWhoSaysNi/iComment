@@ -1,3 +1,35 @@
+<?php
+
+    include 'includes/dbh.inc.php';
+
+    session_start();
+    if(isset($_GET['uid'])){
+        $uid = $_GET['uid'];
+        //echo "<h1>CA MARCHE</h1>";
+    }else{$uid = '';}
+    if(isset($_GET['mail'])){
+        $mail = $_GET['mail'];
+    }else{$mail = '';}
+    if(isset($_GET['error'])){
+        $error = $_GET['error'];
+    }else{$error = '';}
+
+    /*
+    
+    try{
+        $uid = $_GET['uid']
+    } catch($e){
+        $uid = '';
+    }
+    try{
+        $mail = $_GET['mail']
+    } catch($e){
+        $mail = '';
+    }
+    
+    */
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,45 +66,71 @@
                         </li> <?php
                     } 
                     else { ?>
-                        <li onclick="document.getElementById('login').style.display='flex'">
-                            <p>Login / Sign Up</p>
-                        </li> <?php
+                        <li>
+                            <a href="#login" id="logBtn">
+                                <p>Login / Sign Up</p>
+                            </a>
+                        </li><?php
                     }
                 ?>
                 
             </ul>
 
-            <div id="searchBar">
-                <input type="search" id="textInput" placeholder="Let's search for a website!">
-                <input type="button" id="searchButton" value="⌕">
-            </div>
+            <h2 id='username'><?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2>
+
+            <form id="searchBar" action="includes/search.php" method="POST">
+                <input type="text" name="search" id="textInput" placeholder="Let's search for a website!">
+                <button type="submit" name="submit-search" id="searchButton">⌕</button>
+            </form>
 
         </div>
 
     </header>
 
-    
-    <div id='login' class='glass'>
+    <div id="login" class="log glass">
         <form class='login' action='includes/login.inc.php' method='post'>
             <input type='text' name='mailuid' placeholder='Username/Email...'>
             <input type='password' name='pwd' placeholder='Password...'>
             <button type='submit' name='login-submit'>Login</button>
-        </form>
-        <a href='signup.php'>Not signed up yet?</a>
-        <form action='includes/logout.inc.php' method='post'>
-            <button type='submit' name='logout-submit'>Logout</button>
+            <a href="#signup">Not signed up yet?</a>
         </form>
     </div>
     
+    
     <div id="content-blocker-holder"></div>
-    <div id="signup" class="glass">
+    <div id="signup" class="log glass">
         <form class="signup" action="includes/signup.inc.php" method="post">
-            <input type="text" name="uid" placeholder="Username..." value="">
-            <input type="text" name="mail" placeholder="Email..." value="">
+            <input type="text" name="uid" placeholder="Username..." value="<?php echo $uid ?>"/>
+            <input type="text" name="mail" placeholder="Email..." value="<?php echo $mail ?>">
             <input type="password" name="pwd" placeholder="Password...">
             <input type="password" name="pwd-repeat" placeholder="Repeat Password...">
             <button type="submit" name="signup-submit">Sign up</button>
+            <a href="#login">Already have an account?</a>
         </form>
-        <a href="login.php">Already have an account?</a>
     </div>
-        
+
+    <?php if($error){
+        if($error == "nouser"){
+            $errorText = "No such user.";
+        }
+        else if($error == "wrongpassword"){
+            $errorText = "Wrong password.";
+        }
+        else if($error == "emptyfields"){
+            $errorText = "Please fill all fields.";
+        }
+        else if($error == "invalidmail"){
+            $errorText = "Please use a valid Email";
+        }
+        else{
+            $errorText = "http://bitly.com/98K8eH";
+        }
+    }
+
+    if($error){ ?> <!-- holy shit du premier coup -->
+        <div id="errorBox" class="glass">
+            <a onclick="document.getElementById('errorBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('errorBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
+            <p><?php echo $errorText ?></p>
+        </div> <?php 
+    } ?>
+

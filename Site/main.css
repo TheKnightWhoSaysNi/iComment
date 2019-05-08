@@ -64,7 +64,6 @@ header div{
 
 .navBar{
     padding-left: 50px;
-    padding-right: 10px;
     max-width: 23%; /* on fixe la largeur sinon ca décale tout avec le :hover {border...} */
     min-height: 60px;
 }
@@ -83,7 +82,7 @@ header div{
     transition: .1s;
 }
 
-.navBar li p{
+.navBar li p, #logBtn{
     position: relative;
     top: 0px;
     transition: .2s;
@@ -97,6 +96,12 @@ header div{
 
 .navBar li:hover p{
     top: -5px;
+}
+
+#username{
+    margin: auto 0 auto 120px;
+    font-size: 20px;
+    color: gray;
 }
 
 #searchBar{
@@ -115,38 +120,42 @@ header div{
     border: none;
     outline: none;
     background: none;
+    font-size: 16px;
 }
 
 #searchButton{
     width: 50px;
     font-family: Roboto, sans-serif;
     font-size: 40px;
+    padding: auto;
     border: none;
     outline: none;
     background: none;
+    color: var(--aux-color-1);
 }
 
-
-#login, #signup{
+.log{
     display: none;
     position: fixed;
     padding: 50px;
     flex-direction: column;
-    margin: 200px auto;
-    width: 50%;
+    width: 500px;
     border: solid 1px var(--aux-color-0);
     border-radius: 3px;
     font-family: Roboto, sans-serif;
+    top: 150px;
+    left: 50%;
+    margin-left: -19.5%;
 }
 
-#login form, #signup form{
+.log form{
     flex-direction: column;
     margin: 0 auto;
 }
 
-#login form input, #signup form input{
+.log form input{
     height: 40px;
-    width: 20vw;
+    width: 400px;
     min-width: 100px;
     margin: 10px 0;
     background: none;
@@ -157,19 +166,28 @@ header div{
     
 }
 
-#login form button, #signup form button{
-    width: 5vw;
-    min-width: 100px;
+.log form button{
+    width: 60px;
     height: 40px;
     outline: none;
     border: solid 1px var(--aux-color-1);
     background-color: var(--aux-color-0);
     border-radius: 3px;
     margin-left: auto;
-    padding-left: 10%;
+    padding-left: 10px;
     padding: auto;
     display: inline-flex;
     align-items: center
+}
+
+.log a{
+    margin: 20px auto 10px auto;
+    font-family: Roboto, sans-serif;
+    color: var(--aux-color-1);
+    text-decoration: none;
+}
+.log a:hover{
+    color: rgb(46, 46, 46);
 }
 
 #content-blocker{
@@ -183,7 +201,7 @@ header div{
 #signup-warning{
     flex-direction: column;
     left: 100px;
-    margin: 150px auto auto auto;
+    margin: 200px auto auto auto;
     width: 100vw;
     min-height: 300px;
     background-color: rgba(255, 55, 55, 0.65);
@@ -221,9 +239,34 @@ header div{
     background-color: rgba(80, 255, 80, 0.514);
 }
 
+#errorBox{
+    background-color: rgba(255, 0, 0, 0.5);
+    position: fixed;
+    top: 75px; /* hauteur + largeur de la bordure = 100 + 1 px */
+    right: 50px;
+    height: 100px;
+    max-height: 100px;
+    overflow: hidden;
+    width: 200px;
+    color: white;
+    font-family: Roboto, sans-serif;
+    border-radius: 0 0 12px 12px;
+    border: solid 1px red;
+    border-bottom: none;
+}
+#errorBox p{
+    margin: auto auto;
+}
+#errorBox a{
+    position: relative;
+    left: 180px;
+    height: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .glass{
     background-color: var(--header-color);
-    backdrop-filter: blur(5px);  
+    backdrop-filter: blur(10px);  
     -webkit-backdrop-filter: blur(10px);
 }
 
@@ -263,7 +306,23 @@ footer{
     }
 }
 
+@supports (-ms-ime-align:auto) { /* pour edge */
+    .glass{
+        background-color: var(--header-color);
+        backdrop-filter: blur(10px);  
+        -webkit-backdrop-filter: blur(10px);
+    }
 
+    #searchBar{
+        background-color: transparent;
+    }
+}
+
+@media only screen and (max-width: 1520px) {
+    #username{
+        margin-left: 200px;
+    }
+}
 
 @media only screen and (max-width: 1200px) {
     #logo{
@@ -277,6 +336,16 @@ footer{
 
     #searchBar{
         width: 250px;
+    }
+    #username{
+        margin-left: 100px;
+    }
+    .log{
+        width: 400px;
+        margin-left: -23%;
+    }
+    .log form input{
+        width: 300px;
     }
 }
 
@@ -293,6 +362,13 @@ footer{
     #searchBar{
         width: 200px;
     }
+    .log{
+        width: 200px;
+        margin-left: -20%;
+    }
+    .log form input{
+        width: 150px;
+    }
 
 }
 
@@ -304,5 +380,56 @@ footer{
         padding-left: 10px;
         padding-right: 10px;
     }
+    #username{
+        margin-left: 150px;
+    }
 
+}
+
+@media only screen and (max-width: 680px) {
+    #username{
+        display: none;
+    }
+    .log{
+        width: 150px;
+        margin-left: -20%;
+    }
+    .log form input{
+        width: 125px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .navBar{
+        display: none;
+    }
+    #logo{
+        display: flex;
+        font-size: 22px;
+        height: 20px;
+        padding-left: 0px;
+        margin-left: -10px;
+    }
+    .log{
+        width: 150px;
+        margin-left: -35%;
+    }
+    .log form input{
+        width: 125px;
+    }
+    #searchBar{
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    #logo{
+        font-size: 15px;
+        height: 15px;
+        margin-left: -15px;
+    }
+    #searchBar{
+        width: 200px;
+        margin-right: -15px;
+    }
 }
