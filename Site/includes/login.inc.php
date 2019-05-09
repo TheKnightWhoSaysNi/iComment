@@ -29,7 +29,7 @@ if(isset($_POST['login-submit'])) {  //la plupart des commentaires pour ce code 
                     session_start();
                     $_SESSION['userId'] = $row['idUsers'];
                     $_SESSION['userUid'] = $row['uidUsers'];
-                    header("Location: ../index.php?login=success");
+                    header("Location: ../index.php?success=login");
                     exit();
                 }
             }
