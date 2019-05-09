@@ -239,11 +239,11 @@ header div{
     background-color: rgba(80, 255, 80, 0.514);
 }
 
-#errorBox{
+#errorBox, #successBox{
     background-color: rgba(255, 0, 0, 0.5);
     position: fixed;
     top: 75px; /* hauteur + largeur de la bordure = 100 + 1 px */
-    right: 50px;
+    right: 100px;
     height: 100px;
     max-height: 100px;
     overflow: hidden;
@@ -252,16 +252,22 @@ header div{
     font-family: Roboto, sans-serif;
     border-radius: 0 0 12px 12px;
     border: solid 1px red;
-    border-bottom: none;
+    border-top: none;
 }
-#errorBox p{
+#errorBox p, #successBox p{
     margin: auto auto;
 }
-#errorBox a{
+#errorBox a, #successBox a{
     position: relative;
     left: 180px;
     height: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#successBox{
+    background-color: rgba(0, 224, 11, 0.5);
+    border: solid 1px rgb(0, 255, 0);
+
 }
 
 .glass{

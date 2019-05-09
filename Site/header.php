@@ -120,17 +120,41 @@
             $errorText = "Please fill all fields.";
         }
         else if($error == "invalidmail"){
-            $errorText = "Please use a valid Email";
+            $errorText = "Please use a valid Email.";
+        }
+        else if($error == "emailtaken"){
+            $errorText = "This email is already used.";
         }
         else{
             $errorText = "http://bitly.com/98K8eH";
         }
+    }
+    if(isset($_GET['success'])){
+            $success = $_GET['success'];
+    } else {$success = '';}
+
+    if($success){
+        if($success == "signup"){
+            $successText = "Successfully signed in!";
+        } else if($success == "login"){
+            $successText = "Successfully loged in!";
+        } else if($success == "logout"){
+            $successText = "Successfully loged out!";
+        }
+        else{$successtext = "http://bitly.com/98K8eH";}
     }
 
     if($error){ ?> <!-- holy shit du premier coup -->
         <div id="errorBox" class="glass">
             <a onclick="document.getElementById('errorBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('errorBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
             <p><?php echo $errorText ?></p>
+        </div> <?php 
+    }
+
+    if($success){ ?>
+        <div id="successBox" class="glass">
+            <a onclick="document.getElementById('successBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('successBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
+            <p><?php echo $successText ?></p>
         </div> <?php 
     } ?>
 

@@ -7,18 +7,21 @@ window.onscroll = function () {
       document.getElementById("header").style.maxHeight = "60px";
       try{  //try pour pas qu'il y ait d'erreur si "errorBox" a pas encore été créé
         document.getElementById("errorBox").style.top = "60px";
-      }
-      catch(error){
+      }catch(error){}
+      try {
+        document.getElementById("successBox").style.top = "60px";
+      } catch (error) { }
 
-      }
+
     } else {
       document.getElementById("header").style.maxHeight = "75px";
       try{
         document.getElementById("errorBox").style.top = "75px";
-      }
-      catch(error){
+      }catch(error){}
+      try {
+        document.getElementById("successBox").style.top = "75px";
+      } catch (error) { }
 
-      }
     }
   }
   prevScrollpos = currentScrollPos;
@@ -35,6 +38,15 @@ function refreshHash(){
 
 url = window.location.href;
 window.onload = function () {
+
+  try {
+    setTimeout(function () { document.getElementById("errorBox").style.maxHeight = "0"; document.getElementById('errorBox').style.border = 'none'}, 3000);
+  } catch (error) { }
+  try {
+    setTimeout(function () { document.getElementById("successBox").style.maxHeight = "0"; document.getElementById('successBox').style.border = 'none'}, 3000);
+  } catch (error) { }
+
+  
 
   if (window.location.href.includes("#login")) {
     document.getElementById("signup").style.display = "none";
