@@ -3,7 +3,6 @@
     require "header.php";
 ?>
 
-<section>
     <h1>la la la je suis la section de l'index</h1>
     <p>
     Dolor, hac viverra mauris fermentum odio vivamus penatibus venenatis tempor fermentum! Gravida eleifend ornare eu lacus ligula aenean erat enim habitasse senectus. Suspendisse senectus, dictumst libero nec nostra praesent sapien cum. Platea fusce molestie varius magnis? Tempus taciti pellentesque orci ullamcorper in? Blandit potenti, blandit sodales hac. Interdum tempor justo adipiscing libero? Eu conubia augue curae; laoreet at quam? Mollis blandit suspendisse sem auctor tortor primis posuere dapibus tempus. Aliquam ullamcorper tellus iaculis? Curae; nostra per libero enim ornare ipsum augue! Massa mattis sapien enim laoreet tempor montes porttitor pretium sociis, placerat porta purus?

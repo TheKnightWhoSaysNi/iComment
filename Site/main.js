@@ -39,12 +39,12 @@ function refreshHash(){
 url = window.location.href;
 window.onload = function () {
 
-  try {
-    setTimeout(function () { document.getElementById("errorBox").style.maxHeight = "0"; document.getElementById('errorBox').style.border = 'none'}, 3000);
-  } catch (error) { }
-  try {
-    setTimeout(function () { document.getElementById("successBox").style.maxHeight = "0"; document.getElementById('successBox').style.border = 'none'}, 3000);
-  } catch (error) { }
+  if (typeof (document.getElementById("errorBox")) != 'undefined' && document.getElementById("errorBox") != null) { //si l'élément existe
+    setTimeout(function () { document.getElementById("errorBox").style.maxHeight = "0"; document.getElementById('errorBox').style.border = 'none'}, 6000);
+  }
+  if (typeof (document.getElementById("successBox")) != 'undefined' && document.getElementById("successBox") != null) { //pareil
+    setTimeout(function () { document.getElementById("successBox").style.maxHeight = "0"; document.getElementById('successBox').style.border = 'none'}, 6000);
+  }
 
   
 

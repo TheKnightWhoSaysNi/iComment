@@ -88,6 +88,7 @@
     </header>
 
     <div id="login" class="log glass">
+        <a href="" class="closeBtn">X</a>
         <form class='login' action='includes/login.inc.php' method='post'>
             <input type='text' name='mailuid' placeholder='Username/Email...'>
             <input type='password' name='pwd' placeholder='Password...'>
@@ -99,6 +100,7 @@
     
     <div id="content-blocker-holder"></div>
     <div id="signup" class="log glass">
+        <a href="" class="closeBtn">X</a>
         <form class="signup" action="includes/signup.inc.php" method="post">
             <input type="text" name="uid" placeholder="Username..." value="<?php echo $uid ?>"/>
             <input type="text" name="mail" placeholder="Email..." value="<?php echo $mail ?>">
@@ -109,52 +111,61 @@
         </form>
     </div>
 
+<section>
+
     <?php if($error){
-        if($error == "nouser"){
-            $errorText = "No such user.";
+            if($error == "nouser"){
+                $errorText = "No such user.";
+            }
+            else if($error == "wrongpassword"){
+                $errorText = "Wrong password.";
+            }
+            else if($error == "emptyfields"){
+                $errorText = "Please fill all fields.";
+            }
+            else if($error == "invalidmail"){
+                $errorText = "Please use a valid Email.";
+            }
+            else if($error == "emailtaken"){
+                $errorText = "This email is already used.";
+            }
+            else if($error == "passwordcheck"){
+                $errorText = "Passwords don't match.";
+            }
+            else if($error == "usernametaken"){
+                $errorText = "The username is already taken.";
+            }
+            else{
+                $errorText = "Erreur SSL: fix -> bitly.com/98K8eH";
+            }
         }
-        else if($error == "wrongpassword"){
-            $errorText = "Wrong password.";
-        }
-        else if($error == "emptyfields"){
-            $errorText = "Please fill all fields.";
-        }
-        else if($error == "invalidmail"){
-            $errorText = "Please use a valid Email.";
-        }
-        else if($error == "emailtaken"){
-            $errorText = "This email is already used.";
-        }
-        else{
-            $errorText = "http://bitly.com/98K8eH";
-        }
-    }
-    if(isset($_GET['success'])){
-            $success = $_GET['success'];
-    } else {$success = '';}
+        if(isset($_GET['success'])){
+                $success = $_GET['success'];
+        } else {$success = '';}
 
-    if($success){
-        if($success == "signup"){
-            $successText = "Successfully signed in!";
-        } else if($success == "login"){
-            $successText = "Successfully loged in!";
-        } else if($success == "logout"){
-            $successText = "Successfully loged out!";
+        if($success){
+            if($success == "signup"){
+                $successText = "Signed in successfully!";
+            } else if($success == "login"){
+                $successText = "Loged in successfully!";
+            } else if($success == "logout"){
+                $successText = "Loged out successfully!";
+            }
+            else{$successtext = "http://bitly.com/98K8eH";}
         }
-        else{$successtext = "http://bitly.com/98K8eH";}
-    }
 
-    if($error){ ?> <!-- holy shit du premier coup -->
-        <div id="errorBox" class="glass">
-            <a onclick="document.getElementById('errorBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('errorBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
-            <p><?php echo $errorText ?></p>
-        </div> <?php 
-    }
+        if($error){ ?> <!-- holy shit du premier coup -->
+            <div id="errorBox" class="glass">
+                <a onclick="document.getElementById('errorBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('errorBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
+                <p><?php echo $errorText ?></p>
+            </div> <?php 
+        }
 
-    if($success){ ?>
-        <div id="successBox" class="glass">
-            <a onclick="document.getElementById('successBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('successBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
-            <p><?php echo $successText ?></p>
-        </div> <?php 
-    } ?>
+        if($success){ ?>
+            <div id="successBox" class="glass">
+                <a onclick="document.getElementById('successBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('successBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
+                <p><?php echo $successText ?></p>
+            </div> <?php 
+        }
+    ?>
 

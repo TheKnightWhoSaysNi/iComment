@@ -5,14 +5,14 @@ if(isset($_POST['login-submit'])) {  //la plupart des commentaires pour ce code 
     $password =  $_POST['pwd'];
     
     if (empty($mailuid) || empty($password)) {
-        header("Location: ../index.php?error=emptyfields");
+        header("Location: ../?error=emptyfields");
         exit();
     }
     else {
         $sql = "SELECT * FROM users WHERE uidUsers=? OR emailUsers=?;";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)){
-            header("Location: ../index.php?error=sqlerror");
+            header("Location: ../?error=sqlerror");
             exit();
         }
         else{
@@ -22,25 +22,25 @@ if(isset($_POST['login-submit'])) {  //la plupart des commentaires pour ce code 
             if ($row = mysqli_fetch_assoc($result)) {
                 $pwdCheck = password_verify($password, $row['pwdUsers']);
                 if ($pwdCheck == false) {  //on met pas if(!$pwdCheck){} parcequ'une erreur peut arriver telle que $pwdCheck est pas une bool 
-                    header("Location: ../index.php?error=wrongpassword");
+                    header("Location: ../?error=wrongpassword");
                     exit();
                 }
                 else if ($pwdCheck == true) {
                     session_start();
                     $_SESSION['userId'] = $row['idUsers'];
                     $_SESSION['userUid'] = $row['uidUsers'];
-                    header("Location: ../index.php?success=login");
+                    header("Location: ../?success=login");
                     exit();
                 }
             }
             else{
-                header("Location: ../index.php?error=nouser");
+                header("Location: ../?error=nouser");
                 exit();
             }
         }
     }
 }
 else{
-    header("Location: ../index.php");  //si l'utilisateur a accédé a ce programme avec l'url on le redirige vers la page d'inscription
+    header("Location: ../");  //si l'utilisateur a accédé a ce programme avec l'url on le redirige vers la page d'inscription
     exit();
 }

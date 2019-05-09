@@ -100,7 +100,10 @@ header div{
 
 #username{
     margin: auto 0 auto 120px;
-    font-size: 20px;
+    padding-top: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 350;
+    font-size: 17px;
     color: gray;
 }
 
@@ -137,6 +140,10 @@ header div{
 .log{
     display: none;
     position: fixed;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
     padding: 50px;
     flex-direction: column;
     width: 500px;
@@ -144,8 +151,14 @@ header div{
     border-radius: 3px;
     font-family: Roboto, sans-serif;
     top: 150px;
+
+/*
     left: 50%;
     margin-left: -19.5%;
+
+
+*/
+
 }
 
 .log form{
@@ -188,6 +201,13 @@ header div{
 }
 .log a:hover{
     color: rgb(46, 46, 46);
+}
+
+.log .closeBtn{
+    position: relative;
+    top: -50px;
+    left: 270px; 
+    font-size: 20px;
 }
 
 #content-blocker{
@@ -242,20 +262,23 @@ header div{
 #errorBox, #successBox{
     background-color: rgba(255, 0, 0, 0.5);
     position: fixed;
+    margin-left: 10px;
     top: 75px; /* hauteur + largeur de la bordure = 100 + 1 px */
-    right: 100px;
     height: 100px;
     max-height: 100px;
     overflow: hidden;
     width: 200px;
     color: white;
     font-family: Roboto, sans-serif;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 7px 7px;
     border: solid 1px red;
     border-top: none;
+
 }
 #errorBox p, #successBox p{
     margin: auto auto;
+    width: 180px;
+    text-align: center;
 }
 #errorBox a, #successBox a{
     position: relative;
@@ -310,6 +333,12 @@ footer{
     #signup-warning{
         background-color: rgba(255, 55, 55, 0.856);
     }
+    #errorBox{
+        background-color: rgb(255, 80, 80);
+    }
+    #successBox{
+        background-color: rgb(101, 225, 100);
+    }
 }
 
 @supports (-ms-ime-align:auto) { /* pour edge */
@@ -318,9 +347,15 @@ footer{
         backdrop-filter: blur(10px);  
         -webkit-backdrop-filter: blur(10px);
     }
-
     #searchBar{
         background-color: transparent;
+    }
+    #errorBox{
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+    #successBox{
+        background-color: rgba(0, 224, 11, 0.5);
+        border: solid 1px rgb(0, 255, 0);
     }
 }
 
@@ -346,13 +381,7 @@ footer{
     #username{
         margin-left: 100px;
     }
-    .log{
-        width: 400px;
-        margin-left: -23%;
-    }
-    .log form input{
-        width: 300px;
-    }
+    
 }
 
 @media only screen and (max-width: 970px) {
@@ -366,14 +395,7 @@ footer{
     }
 
     #searchBar{
-        width: 200px;
-    }
-    .log{
-        width: 200px;
-        margin-left: -20%;
-    }
-    .log form input{
-        width: 150px;
+        width: 220px;
     }
 
 }
@@ -397,12 +419,9 @@ footer{
         display: none;
     }
     .log{
-        width: 150px;
-        margin-left: -20%;
+        width: 400px;
     }
-    .log form input{
-        width: 125px;
-    }
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -410,32 +429,40 @@ footer{
         display: none;
     }
     #logo{
-        display: flex;
-        font-size: 22px;
-        height: 20px;
-        padding-left: 0px;
-        margin-left: -10px;
+        display: none;
     }
+
+    #searchBar{
+        width: 500px;
+    }
+    #textInput{
+        width: 300px;
+    }
+
+    #searchBar button{
+        margin-left: auto;
+    }
+
     .log{
-        width: 150px;
-        margin-left: -35%;
+        width: 270px;
     }
     .log form input{
-        width: 125px;
-    }
-    #searchBar{
-        width: 200px;
+        width: 250px;
     }
 }
 
-@media only screen and (max-width: 350px) {
-    #logo{
-        font-size: 15px;
-        height: 15px;
-        margin-left: -15px;
+@media only screen and (max-width: 380px) {
+    header div{
+        margin: 0 10px;
     }
     #searchBar{
-        width: 200px;
+        width: 270px;
         margin-right: -15px;
+    }
+    .log{
+        width: 200px;
+    }
+    .log form input{
+        width: 180px;
     }
 }
