@@ -9,6 +9,7 @@ if(isset($_POST['login-submit'])) {  //la plupart des commentaires pour ce code 
         exit();
     }
     else {
+
         $sql = "SELECT * FROM users WHERE uidUsers=? OR emailUsers=?;";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)){

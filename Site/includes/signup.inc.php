@@ -42,13 +42,13 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
                 exit();
             }
             else{
-                $sql = "SELECT uidUsers FROM users WHERE uidUsers=?"; //si on envoie directement $username on pourrait mettre des commandes sql dans "utilisateur" et corrompre la base de données du coup on met un "spaceholder" ==> (?)
+                $sql = "SELECT uidUsers FROM users WHERE uidUsers=?"; //spaceholder PDO pour empecher une injection sql
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) { //mysli_stmt_prepare($stmt, $sql) = True quand ca marche donc si ca marche pas...
                     header("Location: ../?error=sqlerror"."#signup");
                     exit();
                 }
-                mysqli_stmt_bind_param($stmt, "s", $username); //on envoie une string (s)   on vérifie si l'uid est pas déja pris
+                mysqli_stmt_bind_param($stmt, "s", $username); //à travers la connexion $stmt     on envoie une string (s)     le nom d'utilisateur
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_store_result($stmt);
                 $resultCheck = mysqli_stmt_num_rows($stmt); //nombre de correspondances
@@ -57,8 +57,6 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
                     exit();
                 }
             }
-
-            
             
 
             $sql = "INSERT INTO users (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)";

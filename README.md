@@ -1,1 +1,5 @@
-iComment
+iComment is a website that allows you to...
+
+To use it you must 1stly signup with your email... 
+
+It was made by a 

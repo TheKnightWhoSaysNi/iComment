@@ -2,7 +2,7 @@ var prevScrollpos = window.pageYOffset;
 
 window.onscroll = function () {
   var currentScrollPos = window.pageYOffset;
-  if (document.documentElement.clientWidth > 600){
+  if (document.documentElement.clientWidth > 630){
     if (prevScrollpos < currentScrollPos) {
       document.getElementById("header").style.maxHeight = "60px";
       try{  //try pour pas qu'il y ait d'erreur si "errorBox" a pas encore été créé
@@ -31,8 +31,19 @@ function removeContentBlocker() {
   document.getElementById('content-blocker').outerHTML = '';
 }
 
-function refreshHash(){
-  
+function openSearch(){
+  document.getElementById("searchBar").style.width = "300px";
+  document.getElementById("textInput").style.width = "250px";
+  document.getElementById("searchButton").style.display = "flex";
+  document.getElementById("searchButton").style.width = "50px";
+  document.getElementById("searchBar").style.backgroundColor = "rgb(233, 233, 233)";
+}
+function closeSearch(){
+  document.getElementById("searchBar").style.width = "100px";
+  document.getElementById("textInput").style.width = "100px";
+  document.getElementById("searchButton").style.display = "none";
+  document.getElementById("searchButton").style.width = "0px";
+  document.getElementById("searchBar").style.backgroundColor = "transparent";
 }
 
 
@@ -46,7 +57,11 @@ window.onload = function () {
     setTimeout(function () { document.getElementById("successBox").style.maxHeight = "0"; document.getElementById('successBox').style.border = 'none'}, 6000);
   }
 
-  
+  if (window.innerWidth < 1050) {
+    closeSearch();
+  } else {
+    openSearch();
+  }
 
   if (window.location.href.includes("#login")) {
     document.getElementById("signup").style.display = "none";
@@ -64,9 +79,6 @@ window.onload = function () {
     document.getElementById("signup").style.display = "none";
   }
 
-
-
-
   if (!(url.includes("?")) && (url.includes("signup"))) { //si l'utilisateur n'a pas été renvoyé sur la page après une erreur
     document.getElementById('content-blocker-holder').innerHTML = "<div id='content-blocker'><div id = 'signup-warning'><p>We did not spend anything on security, please chose a unique password!</p><button id='warning-button' onclick='removeContentBlocker()'>I understand</button></div></div>";
   }
@@ -76,22 +88,43 @@ window.onload = function () {
   
 }  // c'est plus facile de le supprimer si erreur mais il a le temps d'apparaitre si la connexion est pas tres rapide du coup on le créé si pas d'erreur
 
+
+
 window.onhashchange = function(){
   if (window.location.href.includes("#login")) {
     document.getElementById("signup").style.display = "none";
+    document.getElementById("confirmEmail").style.display = "none";
     document.getElementById("login").style.display = "flex";
   }
   else if (window.location.href.includes("#signup")) {
     document.getElementById("login").style.display = "none";
+    document.getElementById("confirmEmail").style.display = "none";
     document.getElementById("signup").style.display = "flex";
     if(!window.location.href.includes("error")){
       document.getElementById('content-blocker-holder').innerHTML = "<div id='content-blocker'><div id = 'signup-warning'><p>We did not spend anything on security, please chose a unique password!</p><button id='warning-button' onclick='removeContentBlocker()'>I understand</button></div></div>";
     }
   }
+  else if (window.location.href.includes("#confirmEmail")){
+    document.getElementById("signup").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("confirmEmail").style.display = "flex";
+  }
   else {
     document.getElementById("login").style.display = "none";
     document.getElementById("signup").style.display = "none";
   }
-  
+}
 
+
+var previousWidth = 0;
+window.onresize = function(){ //on peut pas utiliser window.onresize parceque sur mobile quand le clavier s'ouvre ca compte comme un resize (vertical je suppose) du coup il faut l'équivalent de onresize mais uniquement horizontal
+  var width = window.innerWidth;
+  if(width != previousWidth){
+    if(window.innerWidth < 1050){
+      closeSearch();
+    } else {
+      openSearch();
+    }
+    previousWidth = width;
+  }
 }

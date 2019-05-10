@@ -39,6 +39,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <meta name="theme-color" content="rgb(233, 233, 233)" />
 </head>
 <body>
 
@@ -50,12 +51,13 @@
 
             <ul class="navBar">
 
+                <!-- Pas de balise <a href=""> </a>  parceque c'est plus simple de centrer le texte en ayant une grande hitbox -->
+                <li onclick="location.href='index.php#about';" id="aboutBtn">
+                    <p>About</p>
+                </li>
+
                 <li onclick="location.href='index.php#start';">
                     <p>Get Started</p>
-                </li>
-                <!-- Pas de balise <a href=""> </a>  parceque c'est plus simple de centrer le texte en ayant une grande hitbox -->
-                <li onclick="location.href='index.php#about';">
-                    <p>About</p>
                 </li>
 
                 <?php
@@ -79,7 +81,7 @@
             <h2 id='username'><?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2>
 
             <form id="searchBar" action="includes/search.php" method="POST">
-                <input type="text" name="search" id="textInput" placeholder="Let's search for a website!">
+                <input type="text" name="search" id="textInput" placeholder="Search for a website" onfocusin="if(window.innerWidth < 1050){openSearch()}" onfocusout="if(window.innerWidth < 1050){closeSearch()}">
                 <button type="submit" name="submit-search" id="searchButton">⌕</button>
             </form>
 
@@ -111,6 +113,13 @@
         </form>
     </div>
 
+    <div id="confirmEmail" class="log glass">
+        <form method="post">
+            <input type="text" name="confirmationCode" placeholder="Confirmation code">
+            <button type="submit" name="signup-submit">Confirm</button>
+        </form>
+    </div>
+
 <section>
 
     <?php if($error){
@@ -127,13 +136,13 @@
                 $errorText = "Please use a valid Email.";
             }
             else if($error == "emailtaken"){
-                $errorText = "This email is already used.";
+                $errorText = "This email is taken.";
             }
             else if($error == "passwordcheck"){
                 $errorText = "Passwords don't match.";
             }
             else if($error == "usernametaken"){
-                $errorText = "The username is already taken.";
+                $errorText = "The username is taken.";
             }
             else{
                 $errorText = "Erreur SSL: fix -> bitly.com/98K8eH";

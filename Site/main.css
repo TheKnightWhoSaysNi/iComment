@@ -63,16 +63,17 @@ header div{
 }
 
 .navBar{
-    padding-left: 50px;
-    max-width: 23%; /* on fixe la largeur sinon ca décale tout avec le :hover {border...} */
+    padding-left: 100px;
+    max-width: 300px; /* on fixe la largeur sinon ca décale tout avec le :hover {border...} */
     min-height: 60px;
 }
 
 .navBar li{
-    min-width: 150px;
+    width: 90px;
     height: 100%;
     margin-top: auto;
     margin-bottom: auto;
+    
 }
 
 .navBar li:hover{
@@ -99,7 +100,7 @@ header div{
 }
 
 #username{
-    margin: auto 0 auto 120px;
+    margin: auto 0 auto 20px;
     padding-top: 5px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 350;
@@ -109,6 +110,7 @@ header div{
 
 #searchBar{
     position: relative;
+    right: 0;
     width: 300px;
     height: 50px;
     margin: auto 0 auto auto;
@@ -127,6 +129,7 @@ header div{
 }
 
 #searchButton{
+    display: none;
     width: 50px;
     font-family: Roboto, sans-serif;
     font-size: 40px;
@@ -135,6 +138,7 @@ header div{
     outline: none;
     background: none;
     color: var(--aux-color-1);
+    overflow: hidden;
 }
 
 .log{
@@ -259,10 +263,14 @@ header div{
     background-color: rgba(80, 255, 80, 0.514);
 }
 
+#confirmEmail{
+
+}
+
 #errorBox, #successBox{
     background-color: rgba(255, 0, 0, 0.5);
-    position: fixed;
-    margin-left: 10px;
+    position: absolute;
+    left: calc(100% - 100%);
     top: 75px; /* hauteur + largeur de la bordure = 100 + 1 px */
     height: 100px;
     max-height: 100px;
@@ -273,7 +281,6 @@ header div{
     border-radius: 0 0 7px 7px;
     border: solid 1px red;
     border-top: none;
-
 }
 #errorBox p, #successBox p{
     margin: auto auto;
@@ -359,17 +366,18 @@ footer{
     }
 }
 
-@media only screen and (max-width: 1520px) {
-    #username{
-        margin-left: 200px;
-    }
-}
-
 @media only screen and (max-width: 1200px) {
     #logo{
         font-size: 35px;
         height: 32px;
     }
+
+    .navBar{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /*
 
     .navBar li{
         min-width: 100px;
@@ -381,33 +389,34 @@ footer{
     #username{
         margin-left: 100px;
     }
+
+    */
     
 }
 
-@media only screen and (max-width: 970px) {
+@media only screen and (max-width: 990px) {
     #logo{
         font-size: 30px;
         height: 29px;
     }
     .navBar{
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 5px;
+        padding-right: 0px;
     }
-
-    #searchBar{
-        width: 220px;
+    #username{
+        display: none;
     }
 
 }
 
-@media only screen and (max-width: 800px) {
-    #logo{
+@media only screen and (max-width: 920px) {
+    .navBar{
+        width: 160px;
+    }
+    #aboutBtn{
         display: none;
     }
-    .navBar{
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+
     #username{
         margin-left: 150px;
     }
@@ -415,21 +424,23 @@ footer{
 }
 
 @media only screen and (max-width: 680px) {
-    #username{
-        display: none;
-    }
     .log{
         width: 400px;
     }
 
 }
 
-@media only screen and (max-width: 600px) {
-    .navBar{
-        display: none;
-    }
+@media only screen and (max-width: 630px) {
     #logo{
-        display: none;
+        font-size: 15px;
+        height: 15px;
+    }
+
+    header div{
+        margin: 
+    }
+    .navBar, #logo{
+        overflow: hidden;
     }
 
     #searchBar{
@@ -451,13 +462,12 @@ footer{
     }
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 360px) {
     header div{
         margin: 0 10px;
     }
     #searchBar{
-        width: 270px;
-        margin-right: -15px;
+        width: 150px;
     }
     .log{
         width: 200px;
