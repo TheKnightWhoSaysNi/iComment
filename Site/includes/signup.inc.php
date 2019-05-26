@@ -42,7 +42,7 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
                 exit();
             }
             else{
-                $sql = "SELECT uidUsers FROM users WHERE uidUsers=?"; //spaceholder PDO pour empecher une injection sql
+                $sql = "SELECT uidUsers FROM users WHERE uidUsers=?"; //spaceholder PDO pour empecher une injection sql, prepared statement
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) { //mysli_stmt_prepare($stmt, $sql) = True quand ca marche donc si ca marche pas...
                     header("Location: ../?error=sqlerror"."#signup");
@@ -59,7 +59,7 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
             }
             
 
-            $sql = "INSERT INTO users (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users (uidUsers, emailUsers, pwdUsers, token) VALUES (?, ?, ?, ?)";
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)) { //mysli_stmt_prepare($stmt, $sql) = True quand ca marche donc si ca marche pas...
                 header("Location: ../?error=sqlerror"."#signup");
@@ -67,8 +67,19 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
             }
             else{
                 $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-                mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd); //on envoie trois strings (sss)
+                $token = "";
+                $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; //on créé un code de vérification à envoyer par mail
+                for ($i = 0; $i < 5; $i++) { 
+                    $index = rand(0, strlen($characters) - 1); 
+                    $token .= $characters[$index]; 
+                }
+
+                mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashedPwd, $token); //on envoie 4 strings (ssss)
                 mysqli_stmt_execute($stmt);
+                if (!mail($email, "Activate your account. ", "Please activate your iComment with this code: ".$token." . " ,"From:no-reply@icomment.epizy.com")){ //mail(to, subject, message, headers)
+                    header("Location: ../?error=emailError");
+                    exit();
+                } 
                 header("Location: ../?success=signup#login");
                 exit();
             }

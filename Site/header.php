@@ -1,8 +1,12 @@
+<!-- crtl + / pour commenter une ligne (vStudio) -->
+
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
     include 'includes/dbh.inc.php';
-
-    session_start();
     if(isset($_GET['uid'])){
         $uid = $_GET['uid'];
         //echo "<h1>CA MARCHE</h1>";
@@ -52,13 +56,16 @@
             <ul class="navBar">
 
                 <!-- Pas de balise <a href=""> </a>  parceque c'est plus simple de centrer le texte en ayant une grande hitbox -->
-                <li onclick="location.href='index.php#about';" id="aboutBtn">
+                <li onclick="location.href='#about';" id="aboutBtn">
                     <p>About</p>
                 </li>
-
-                <li onclick="location.href='index.php#start';">
-                    <p>Get Started</p>
-                </li>
+                <?php
+                if (isset($_SESSION['userId'])){ ?>
+                    <li onclick="location.href='post.php';">
+                        <p>Post</p>
+                    </li> 
+                <?php
+                } ?>
 
                 <?php
 
@@ -80,7 +87,7 @@
 
             <h2 id='username'><?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2>
 
-            <form id="searchBar" action="includes/search.php" method="POST">
+            <form id="searchBar" action="search.php" method="post" name="search" autocomplete="off">
                 <input type="text" name="search" id="textInput" placeholder="Search for a website" onfocusin="if(window.innerWidth < 1050){openSearch()}" onfocusout="if(window.innerWidth < 1050){closeSearch()}">
                 <button type="submit" name="submit-search" id="searchButton">⌕</button>
             </form>
@@ -105,7 +112,7 @@
         <a href="" class="closeBtn">X</a>
         <form class="signup" action="includes/signup.inc.php" method="post">
             <input type="text" name="uid" placeholder="Username..." value="<?php echo $uid ?>"/>
-            <input type="text" name="mail" placeholder="Email..." value="<?php echo $mail ?>">
+            <input type="text" name="mail" placeholder="Email..." value="<?php echo $mail ?>"/>
             <input type="password" name="pwd" placeholder="Password...">
             <input type="password" name="pwd-repeat" placeholder="Repeat Password...">
             <button type="submit" name="signup-submit">Sign up</button>
@@ -119,8 +126,6 @@
             <button type="submit" name="signup-submit">Confirm</button>
         </form>
     </div>
-
-<section>
 
     <?php if($error){
             if($error == "nouser"){
@@ -144,8 +149,11 @@
             else if($error == "usernametaken"){
                 $errorText = "The username is taken.";
             }
+            else if($error == "websitenotreached"){
+                $errorText = "The url is not valid / could not be reached.";
+            }
             else{
-                $errorText = "Erreur SSL: fix -> bitly.com/98K8eH";
+                $errorText = "Erreur SQL: fix -> bitly.com/98K8eH";
             }
         }
         if(isset($_GET['success'])){
@@ -159,8 +167,9 @@
                 $successText = "Loged in successfully!";
             } else if($success == "logout"){
                 $successText = "Loged out successfully!";
-            }
-            else{$successtext = "http://bitly.com/98K8eH";}
+            } else if($success == "post"){
+                $successText = "Posted";
+            } else {$successtext = "http://bitly.com/98K8eH";}
         }
 
         if($error){ ?> <!-- holy shit du premier coup -->

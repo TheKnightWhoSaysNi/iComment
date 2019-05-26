@@ -35,15 +35,25 @@ function openSearch(){
   document.getElementById("searchBar").style.width = "300px";
   document.getElementById("textInput").style.width = "250px";
   document.getElementById("searchButton").style.display = "flex";
-  document.getElementById("searchButton").style.width = "50px";
   document.getElementById("searchBar").style.backgroundColor = "rgb(233, 233, 233)";
+  if(window.innerWidth > 360){
+    document.getElementById("searchButton").style.width = "50px";
+  } else {
+    document.getElementById("searchButton").style.width = "30px";
+    document.getElementById("logo").style.display = "none";
+    document.getElementsByClassName("navBar")[0].style.display = "none";
+  }
 }
 function closeSearch(){
   document.getElementById("searchBar").style.width = "100px";
   document.getElementById("textInput").style.width = "100px";
   document.getElementById("searchButton").style.display = "none";
-  document.getElementById("searchButton").style.width = "0px";
   document.getElementById("searchBar").style.backgroundColor = "transparent";
+  document.getElementById("searchButton").style.width = "0px";
+  if (window.innerWidth <= 360) {
+    document.getElementById("logo").style.display = "flex";
+    document.getElementsByClassName("navBar")[0].style.display = "flex";
+  }
 }
 
 

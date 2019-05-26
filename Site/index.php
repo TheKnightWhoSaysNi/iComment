@@ -1,7 +1,13 @@
 <?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     $title = "iComment";
     require "header.php";
 ?>
+
+<section>
 
     <h1>la la la je suis la section de l'index</h1>
     <p>

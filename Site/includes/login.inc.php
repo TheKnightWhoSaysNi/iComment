@@ -15,9 +15,8 @@ if(isset($_POST['login-submit'])) {  //la plupart des commentaires pour ce code 
         if (!mysqli_stmt_prepare($stmt, $sql)){
             header("Location: ../?error=sqlerror");
             exit();
-        }
-        else{
-            mysqli_stmt_bind_param($stmt, "ss", $mailuid, $mailuid);
+        } else {
+            mysqli_stmt_bind_param($stmt, "ss", $mailuid, $mailuid); //on le met deux fois parcequ'il y a deux spaceholders dans $sql 
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
