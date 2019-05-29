@@ -30,17 +30,17 @@ if(isset($_POST['post-submit'])) {  //la plupart des commentaires pour ce code s
 
     require 'dbh.inc.php';
 
-    $sql = "INSERT INTO articles (aWebsite, aComment, aAuthor, aDateTime, aTimeZone, aUrl, aReview) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../?error=sqlerror");
-        exit();
-    } else {
-        mysqli_stmt_bind_param($stmt, "sssssss", $website, $comment, $author, $dateTime, $timeZone, $url, $review);
-        if(mysqli_stmt_execute($stmt)){
-            header("Location: ../?success=post");
+        $sql = "INSERT INTO articles (aWebsite, aComment, aAuthor, aDateTime, aTimeZone, aUrl, aReview) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("Location: ../?error=sqlerror");
+            exit();
+        } else {
+            mysqli_stmt_bind_param($stmt, "sssssss", $website, $comment, $author, $dateTime, $timeZone, $url, $review);
+            if(mysqli_stmt_execute($stmt)){
+                header("Location: ../?success=post");
+            }
+            exit();
         }
-        exit();
-    }
 
 } else { header("Location: ../");}

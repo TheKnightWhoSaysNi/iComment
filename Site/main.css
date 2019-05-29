@@ -6,9 +6,8 @@
 }
 
 :root{
-    --main-color: #7c4953 ; /*on déclare la couleur principale    #880921*/
     --aux-color-0: #8c7ae6; /*  = matt purple */
-    --aux-color-1: rgb(82, 82, 82); /* // secondaire = mazarine blue */
+    --aux-color-1: rgb(82, 82, 82);
     --aux-color-2: rgba(159, 184, 218, 0.4); /* // tertiaire = je sais pas comment ca ça s'appelle */
     --header-color: rgba(255, 255, 255, 0.6);
 }
@@ -339,7 +338,7 @@ section p{
 .searchResults h1{
     color: var(--aux-color-1);
     text-decoration: none;
-    border-bottom: solid 1px var(--aux-color-0);
+    border-bottom: solid 2px var(--aux-color-0);
     max-width: 210px;
     height: 24px;
     font-size: 24px;
@@ -427,6 +426,27 @@ footer{
     width: 100%;
     background-color: orange;
 }
+
+.deleteBtn{
+    margin-left: auto;
+    background-color: none;
+}
+
+.deleteBtn button{
+    outline: none;
+    border: solid 1px var(--aux-color-0);
+    border-radius: 4px;
+    padding: 0 5px 0 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
+.deleteBtn button:hover{
+    background-color: var(--aux-color-0);
+}
+
+/* #accountSection h1{
+
+} */
 
 @supports not (backdrop-filter: blur(5px)) {
     .glass{
@@ -558,6 +578,8 @@ footer{
     }
     #signup-warning p{
         font-size: 30px;
+    }
+    #postContainer form div input[type=radio]{
     }
 }
 

@@ -1,7 +1,7 @@
 <!-- crtl + / pour commenter une ligne (vStudio) -->
 
 <?php
-    if(!isset($_SESSION)) 
+    if(!isset($_SESSION))
     { 
         session_start(); 
     } 
@@ -69,9 +69,14 @@
 
                 <?php
 
-                    if (isset($_SESSION['userId'])) {    //comme il y a plein de guillemets et de balises c'est plus simple d'ouvrir et fermer du php autour de l'html plutot que de mettre l'html dans le php avec echo?>
+                    if(strpos($_SERVER['REQUEST_URI'], 'account') !== false){ ?>
                         <li onclick="location.href='includes/logout.inc.php';">
-                            <p>Log Out</p>
+                            <p>Log out</p>
+                        </li> <?php
+                        
+                    } elseif (isset($_SESSION['userId'])) {    //comme il y a plein de guillemets et de balises c'est plus simple d'ouvrir et fermer du php autour de l'html plutot que de mettre l'html dans le php avec echo?>
+                        <li onclick="location.href='account.php';">
+                            <p>Account</p>
                         </li> <?php
                     } 
                     else { ?>
@@ -85,7 +90,7 @@
                 
             </ul>
 
-            <h2 id='username'><?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2>
+            <h2 id='username'> <?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2>
 
             <form id="searchBar" action="search.php" method="post" name="search" autocomplete="off">
                 <input type="text" name="search" id="textInput" placeholder="Search for a website" onfocusin="if(window.innerWidth < 1050){openSearch()}" onfocusout="if(window.innerWidth < 1050){closeSearch()}">
@@ -102,7 +107,7 @@
             <input type='text' name='mailuid' placeholder='Username/Email...'>
             <input type='password' name='pwd' placeholder='Password...'>
             <button type='submit' name='login-submit'>Login</button>
-            <a href="#signup">Not signed up yet?</a>
+            <a href="#signup">Not signed up yet? Sign up here.</a>
         </form>
     </div>
     
@@ -116,7 +121,7 @@
             <input type="password" name="pwd" placeholder="Password...">
             <input type="password" name="pwd-repeat" placeholder="Repeat Password...">
             <button type="submit" name="signup-submit">Sign up</button>
-            <a href="#login">Already have an account?</a>
+            <a href="#login">Already have an account? Log in here.</a>
         </form>
     </div>
 
@@ -152,6 +157,9 @@
             else if($error == "websitenotreached"){
                 $errorText = "The url is not valid / could not be reached.";
             }
+            else if($error == "notowncom"){
+                $errorText = "No hun, you can't delete someone else's comment";
+            }
             else{
                 $errorText = "Erreur SQL: fix -> bitly.com/98K8eH";
             }
@@ -169,10 +177,12 @@
                 $successText = "Loged out successfully!";
             } else if($success == "post"){
                 $successText = "Posted";
+            } else if($success == "delCom"){
+                $successText = "Post successfully deleted";
             } else {$successtext = "http://bitly.com/98K8eH";}
         }
 
-        if($error){ ?> <!-- holy shit du premier coup -->
+        if($error){ ?>
             <div id="errorBox" class="glass">
                 <a onclick="document.getElementById('errorBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('errorBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
                 <p><?php echo $errorText ?></p>
