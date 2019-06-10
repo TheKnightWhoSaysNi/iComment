@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+              <!-- Global site tag (gtag.js) - Google Analytics -->
+              <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133190058-1"></script>
+              <script> window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'UA-133190058-1');
+              </script>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <meta charset="UTF-8">
+    <title>Projet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+          $('a[href=#header]').click(function(){
+            $('html').animate({scrollTop:0}, 'slow');
+            return false;
+          });
+        });
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+</head>
+<body>
+<div id="blockpage">
+<h1>GAMETOP</h1>
+    <nav>
+                <ul class="menu">
+                  <li><a href="index.html">Accueil</a></li>
+                  <li><a href="video.html">Projet</a></li>
+                  <li><a href="#contact">Dossier</a></li>
+                </ul>
+    </nav>
+
+    <img class="image1" src="https://image.noelshack.com/fichiers/2019/11/5/1552663212-gametop.png">
+    <strong><p class="intro">Qu'est-ce donc la GAMETOP ? Bonne question ! La GAMETOP est un projet de console portable tournant sur un Raspberry pi zero W...
+        Ne vous inquiétez pas si vous ne savez pas ce qu'est le Raspberry, tout vous sera expliqué plus bas.
+        Vous trouverez ici toutes les explications qui vous permettront de comprendre le fonctionnement et la fabrication de la GAMETOP
+        mais aussi, pourquoi pas, de la reproduire. Pour les plus scéptiques, pas d'inquiétude le projet est plutôt simple à réaliser, un peu de motivation suffit. On a plus qu'a vous souhaitez une bonne lecture. <br>
+    <header>
+    <div class="table">
+    <a id="table" href="#fonctionnement"><p><span>1.</span> Le fonctionnement du Gametop</p></a>
+    <div class="sousParties">
+        <a href="#raspberry"><p><span>1.1</span> Le Raspberry</p></a>
+        <a href="#ecran"><p><span>1.2</span> L'écran</p></a>
+        <a href="#bouton"><p><span>1.3</span> Les boutons de contrôle</p></a>
+        <a href="#batterie"><p><span>1.4</span> Batterie</p></a>
+        <a href="#coque"><p><span>1.5</span> La coque</p></a>
+        <a href="#software"><p><span>1.6</span> Le software</p></a>
+        </div>
+    <a href="#construction"><p><span>2.</span> La construction du Gametop</p></a>
+        <div class="sousParties">
+        <a href="#matériel"><p><span>2.1</span> Le matériel</p></a>
+        <a href="#fabricationBatterie"><p><span>2.2</span> Fabrication de la batterie</p></a>
+        <a href="#installationRetropie"><p><span>2.3</span> L'installation de Retropie</p></a>
+        <a href="#configuration"><p><span>2.4</span> Configuration de la langue sur Retropie</p></a>
+        <a href="#roms"><p><span>2.5</span> L'installation des ROMs</p></a>
+        <a href="#configurationSup"><p><span>2.6</span> Configurations supplémentaires sur Retropie</p></a>
+        </div>
+    </div>
+    </header>
+        <h4 id="fonctionnement"><p>Le fonctionnement du GAMETOP</p></h4>
+        <h3 id="raspberry"><p>Le Raspberry</p></h3>
+        <span class=text>
+        <p>Qu'est-ce qu'un Raspberry PI ? Le Raspberry Pi est un nano-ordinateur monocarte à processeur ARM conçu par des professeurs du département informatique de l'université de Cambridge dans le cadre de la fondation Raspberry Pi.
+            Cet ordinateur, de la taille d'une carte de crédit, est destiné à encourager l'apprentissage de la programmation informatique ; il permet l'exécution de plusieurs variantes du système d'exploitation libre GNU/Linux (notamment Debian) et des logiciels compatibles.
+            Il est fourni nu, c'est-à-dire la carte mère seule, sans boîtier, alimentation, clavier, souris ni écran, dans l'objectif de diminuer les coûts et de permettre l'utilisation de matériel de récupération. Néanmoins des « kits » regroupant le « tout en un » sont disponibles sur le web à partir de quelques dizaines d'euros seulement.
+            Ainsi, pour ce projet, nous avons choisi le Raspberry pi zero W. Ce modèle est le plus petit de la gamme, il consomme très peu mais cela se traduit par des performances limitées, mais il suffit amplement pour le Gametop.</p></span>
+            <img class="raspberry" src="https://cdn.planete-domotique.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/p/i/pi-zero-header-w-800x609.jpg"  width="300" height="250">       
+        <h3 id="ecran"><p>L'écran</p></h3>
+        <span class=text>
+        <p>L'écran n'est rien de plus le composant nous permettant de visualiser l'interface graphique. Nous avons choisi un écran compatible Raspberry et non un écran standard.
+            Pourquoi ce choix me diriez-vous ? Tout simplement car il se branche directement à celui-ci via les broches du Raspberry, il n’y a pas de câbles Hdmi ce qui évite un branchement encombrant
+            et est donc très avantageux pour réaliser une console portable. On va utiliser un écran de taille 3,5 pouces, ni trop grand, ni trop petit. C’est aussi plus compact et consomme moins d’énergie.</p></span>
+            <img class="raspberry" src="https://yadom.fr/media/catalog/product/cache/5/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/3/_/3.5inch-rpi-lcd-a-1.jpg"  width="500" height="340">
+        <h3 id="bouton"><p>Les boutons de contrôle</p></h3>
+        <span class=text>
+        <p>Une manette de jeu est un contrôleur de jeu tenu à deux mains où les doigts sont utilisés pour fournir une entrée. Une manette comporte divers interrupteurs et détecteurs dont
+            l'actionnement permet au joueur l'interaction avec le jeu vidéo, ce sont les boutons. Il s'agit habituellement du périphérique d'entrée principal d'une console de jeux vidéo.
+            Pour le GAMETOP la manette doit etre intégré, comme pour la plupart des consoles portables, afin qu'elle soit le plus compact possible. </p></span>
+            <img class="raspberry" src="https://i2.cdscdn.com/pdt2/2/3/2/1/300x300/vsh3664674166232/rw/vshop-r-manette-retro-super-nes.jpg"  width="500" height="340">
+        <h3 id="batterie"><p>La batterie</p></h3>
+        <span class=text>
+        <p>La batterie est une source d'énergie rechargeable qui équipe les appareils mobiles tels que les ordinateurs portables et les téléphones mais aussi certaines consoles pour les rendre portable,
+            leur permettant de s'affranchir momentanément d'une alimentation électrique depuis une prise. L'autonomie de chaque appareil dépend de sa consommation,
+            chacun étant plus ou moins gourmand selon ses besoins. Un ordinateur tient entre 2 et 8h alors qu'un téléphone peut tenir plusieurs jours. Pour le GAMETOP nous utiliserons unne batterie
+            consistituée de 2 cellules 18650 au lithium-ion reliées à un convertisseur 5v, utilisé notamnent dans les batteries portables, il va transformer les tensions des 2 cellules en 5volts (3.7v+3.7v -> 5 v).</p></span>
+            <img class="raspberry" src="https://vruzend.com/wp-content/uploads/2017/09/25R.png"  width="500" height="340">
+        <h3 id="coque"><p>La coque</p></h3>
+        <span class=text>
+        <p>C'est tout simplement la partie qui va nous permettre de maintenir toute l'électronique tout en pouvant utiliser la console, un peu comme le boitier d'un ordinateur fixe
+            mais avec l'écran et le clavier intégré au boitier. Pour avoir une coque parfaitement sur mesure nous la modéliserons et l'imprimerons en 3d avec une imprimante 3d anet a8.
+            Certes un peu plus complexe que d'acheter une coque de Game boy de <a target="_blank" href="https://fr.shopping.rakuten.com/offer/buy/3417207475/retro-mini-console-de-jeux-video-portable-gameboy.html?bbaid=4199030945&t=180109&xtatc=PUB-%5Bggp%5D-%5BJeux-Video-et-Consoles%5D-%5BConsoles%5D-%5B3417207475%5D-%5Bneuf%5D-%5BLamour%5D&ptnrid=pt%7C593574563690%7Cc%7C295686360433%7C3417207475&ptnrid=siQ1xDmeR_dc|pcrid|295686360433|pkw||pmt|&ja2=tsid:|cid:722762320|agid:56875337462|tid:aud-383473392661:pla-593574563690|crid:295686360433|nw:g|rnd:15462598751701963570|dvc:c|adp:1o2&gclid=CjwKCAjwvuzkBRAhEiwA9E3FUmSO8uSe1ACQ869_VhlC_5wzHYJhi5uGqLc2P326xh2WRMUecpDZtRoCqJAQAvD_BwE">ce type</a>,
+            ou d'autres consoles, mais cela nous permet d'être beaucoup plus libre sur
+            la conception de la console mais libre à vous de choisir ce que vous préférez.</p></span>
+            <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/12/6/1553365522-capture.png"  width="500" height="340">
+        <h3 id="software"><p>Le software</p></h3>
+        <span class=text>
+        <p>Le Software est le nom  donné aux logiciels, systèmes d’exploitations et aux applications.
+            Le software comprend tous les logiciels nécessaires au fonctionnement d’un système informatique.
+            Ils fournissent une interface permettant à l’utilisateur de commander son ordinateur (Hardware).
+            Ici, dans le cas de notre console le software sera géré par l'application d'émulation Retropie ce qui nous permettra de jouer à des jeux vidéos sur notre hardware, ici le Raspberry Pi zero.
+            Un émulateur est un logiciel dont le rôle est de reproduire le comportement d'un ordinateur ou d'une console obsolète. L'ordinateur ou l'appareil sur lequel fonctionne l'émulateur se comporte alors comme
+            la machine qu'on cherche à imiter.
+            Dans le cas d'une console, les émulateurs servent à faire fonctionner des jeux d'anciennes consoles sur des modèles plus récents ou sur des ordinateurs.
+            <img class="raspberry2" src="https://retropie.org.uk/wp-content/uploads/2016/04/RetroPieWebsiteLogo.png"  width="200" height="140">
+        </p></span>
+<h4 id="construction"><p>La construction du GAMETOP</p></h4>
+        <h3><p>Le matériel</p></h3>
+        <span class=text>
+    <ul id="matériel">
+        <br>
+        <h5>Composants</h5>
+        <br>
+        <li><a target="_blank" href="https://www.amazon.fr/Raspberry-Pi-Zero-W/dp/B078YXBKXM/ref=sr_1_3?s=electronics&ie=UTF8&qid=1553367930&sr=1-3&keywords=Un+Raspberry+Pi+zero+W">Un Raspberry Pi zero W</li></a>
+        <li><a target="_blank" href="https://www.ebay.fr/i/182286711386?chn=ps&dispItem=1">Une manette de SuperNintendo usb </li></a>
+        <li><a target="_blank" href="https://www.ebay.fr/i/152314431812?chn=ps&dispItem=1">2 cellules 18650 au li-ion</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/gp/product/B01CNLYL1C/ref=crt_ewc_title_srh_2?ie=UTF8&psc=1&smid=A27JHWVV0LPF6O">Un écran 3,5" pour Raspberry</li></a></a>
+        <li><a target="_blank" href="https://www.banggood.com/Dual-USB-5V-1A-2_1A-Mobile-Power-Bank-18650-Battery-Charger-PCB-Module-Board-p-1031593.html?rmmds=myorder">Un module de conversion "Step-Up" 3,7v - 5v avec module de charge intégré</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/Kingston-Carte-Micro-Classe-Adaptateur/dp/B001CQT0X4/ref=asc_df_B001CQT0X4/?tag=googshopfr-21&linkCode=df0&hvadid=48674137526&hvpos=1o1&hvnetw=g&hvrand=14548793975665923556&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9056507&hvtargid=pla-77948149286&psc=1">Une micro SD de 8go minimum</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/Romote-femelle-Micro-adaptateur-fonction/dp/B07F6Y3QYC/ref=sr_1_100?ie=UTF8&qid=1553368502&sr=8-100&keywords=adaptateur+micro+usb+male+usb+femelle">Un adaptateur micro usb male - usb femelle</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/Deanyi-commutateur-Interrupteur-%C3%A9lectriques-%C3%A9lectroniques/dp/B07KR7GYKS/ref=sr_1_13?ie=UTF8&qid=1553368618&sr=8-13&keywords=interrupteur+%C3%A0+glissi%C3%A8re+2+positions">Un Interrupteur à glissière 2 positions</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/HuaYang-Micro-cable-chargeur-Galaxy/dp/B00N1U2252/ref=sr_1_39?ie=UTF8&qid=1553368708&sr=8-39&keywords=cable+usb+-+micro+usb">Un cable usb - micro usb</li></a>
+        <br>
+        <h5>Outils</h5>
+        <br>
+        <li><a target="_blank" href="https://www.amazon.fr/Electrique-Meterk-Temp%C3%A9rature-Interrupteur-Antistatique/dp/B0761GYZWQ/ref=sr_1_14?ie=UTF8&qid=1553368826&sr=8-14&keywords=fer+%C3%A0+souder">Un fer à souder et l'équipement qui va avec ( fil d'étain, pompe à dessouder, etc )</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/Comgrow-Creality-Ender-Imprimante-Aluminum/dp/B07BR3F9N6/ref=sr_1_1?s=industrial&ie=UTF8&qid=1553368846&sr=1-1&keywords=imprimante+3d">Une imprimante 3d</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/Acer-Chromebook-CB5-312T-Ordinateur-Quad-Core/dp/B01MQ12I4X/ref=sr_1_1_sspa?s=computers&ie=UTF8&qid=1553368885&sr=1-1-spons&keywords=ordinateur&psc=1">Un ordinateur avec une connexion wifi</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/Transcend-TS-RDF5K-Lecteur-cartes-MicroSD/dp/B009D79VH4/ref=sr_1_5?s=computers&ie=UTF8&qid=1553368901&sr=1-5&keywords=Un+adaptateur+micro+SD+-+usb">Un adaptateur micro SD - usb ( si besoin )</li></a>
+        <li><a target="_blank" href="https://www.amazon.fr/Zantec-brainytrade-num%C3%A9rique-voltm%C3%A8tre-multim%C3%A8tre/dp/B07CPFLYTR/ref=sr_1_1?s=computers&ie=UTF8&qid=1553368971&sr=1-1&keywords=multimetre">Un multimètre</li></a>
+    </ul>
+        </p>
+        </span>
+        <h3 id="fabricationBatterie"><p>Fabrication de la batterie</p></h3>
+        <span clas=text>
+            <p>On commence tout doucement par quelque chose de simple. La batterie qui alimentera notre projet de console portable est constitué de 2 cellules branchées en parallèle.
+                En effet c'est là que l'aspect "portable" de notre console prend tout son sens, on pourrait se contenter d'un vulgaire câble branché sur une prise secteur mais ce n'est pas
+                vraiment ambitieux. La batterie doit non seulement être compact mais aussi avoir une bonne autonomie et se charger facilement. C'est ainsi qu'on a choisi de faire une batterie à 2 cellules, ni plus ni moins, car cela semble être un bon compromis.
+                Attention à bien souder les deux batteries en parallèle
+                et non en série car on ne veut pas additionner les tensions mais seulement les intensités, le schéma ci-dessous permet de mieux comprendre.</p>
+                <a href="https://helicoracing.com/WebRoot/LaPoste/Shops/box7044/MediaGallery/Icone/Branchement_batterie_serie_ou_para.jpg"><img class="raspberry" src="https://helicoracing.com/WebRoot/LaPoste/Shops/box7044/MediaGallery/Icone/Branchement_batterie_serie_ou_para.jpg"/></a>
+                <p>Une fois soudés, les deux cellules forment une batterie de 3.7v et de 4000mAh. </p>
+                <a href="https://image.noelshack.com/fichiers/2019/12/7/1553452184-1553359678-img-20190319-133821.jpg"><img class="raspberry" src="https://image.noelshack.com/fichiers/2019/12/7/1553452184-1553359678-img-20190319-133821.jpg" width="280" height="350" alt="#" title="#"/></a>
+                <p>De mon côté on peut voir que les cellules sont déchargées car elle délivre seulement 2.7v contre 3.7v normalement. Mais cela ne pose pas de problème car une fois reliés au convertisseur on pourra recharger le tout.</p>
+                <a href="https://image.noelshack.com/fichiers/2019/12/6/1553359635-img-20190319-133729.jpg"><img class="raspberry" src="https://image.noelshack.com/fichiers/2019/12/6/1553359635-img-20190319-133729.jpg" alt="#" title="#" width="420" height="320"/></a>
+                <p>On peut ensuite souder celle-ci aux bornes +/- du convertisseur. </p>
+                <a href="https://image.noelshack.com/fichiers/2019/12/7/1553452061-1553359628-img-20190319-133905.jpg"><img src="https://image.noelshack.com/fichiers/2019/12/7/1553452061-1553359628-img-20190319-133905.jpg" alt="#" title="#" width="280px" height="350px"/></a>
+                <a href="https://image.noelshack.com/fichiers/2019/12/7/1553451981-1553359631-img-20190319-133910.jpg"><img src="https://image.noelshack.com/fichiers/2019/12/7/1553451981-1553359631-img-20190319-133910.jpg" width="280px" height="350px"/></a>
+                <a href="https://image.noelshack.com/fichiers/2019/12/7/1553451366-1553359701-img-20190319-134354.jpg"><img src="https://image.noelshack.com/fichiers/2019/12/7/1553451366-1553359701-img-20190319-134354.jpg" alt="#" title="#" width="280px" height="350px"/></a>
+                <p>D'après <a class="lien" target="_blank" href="https://wiki.mchobby.be/index.php?title=RASP-PIZERO-Performance"> ce site</a>, la consommation typique du Pi Zero est de 160mA (officiellement), soit environ 0.8 Wh. Mais en faisant tourner des jeux vidéo sous Retropie on peut monter à 2Wh, c'est-à-dire 400mA. Notre batterie de 5v (~5.2V) et de 4000mAh nous permettra donc de jouer, très approximativement, 10 heures.</p>
+        </span>
+        <h3 id="installationRetropie"><p>L'installation de Retropie</p></h3>
+        <span clas=text>
+            <p>Pour que ce circuit électronique devienne une console, il faut installer le software, en l'occurrence Retropie. Ne vous inquiétez pas, ce n'est pas bien compliqué.
+                On aura besoin de la micro SD et des logiciels gratuits <a target="_blank" href="https://www.balena.io/etcher/">Etcher</a> et <a target="_blank" href="https://www.sdcard.org/downloads/formatter/">SD Memory Card Formatter</a> sur votre ordinateur.
+                Branchez la micro SD sur votre ordinateur par le billet du port de carte SD et d'un adaptateur micro SD - SD ou alors de l'adaptateur micro SD - USB.
+                Lancez SD card formatter, sélectionnez votre carte, cliquez sur "Quick format" puis sur "Format".
+                Votre carte micro SD sera complètement formatée et donc tous les fichiers qu'elle contient seront supprimés.</p>
+                <a href="https://dl2.pushbulletusercontent.com/wGdLne00IwM3T0YU89mbI3yPcIWBFZgY/Annotation%202019-03-23%20171147.png"><img class="raspberry" src="https://dl2.pushbulletusercontent.com/wGdLne00IwM3T0YU89mbI3yPcIWBFZgY/Annotation%202019-03-23%20171147.png" alt="#" title="#"/></a>
+                <p>Téléchargez ensuite <a href="https://github.com/RetroPie/RetroPie-Setup/releases/download/4.4/retropie-4.4-rpi1_zero.img.gz">ce fichier</a> et lancez Etcher. Une fois le logiciel lancé, sélectionnez le fichier que vous venez de télécharger, c'est-à-dire l'image de Retropie, sélectionnez votre carte SD et cliquez sur "Flash".</p>
+                <a href="https://dl2.pushbulletusercontent.com/kSU3J6GEHIFSaumourBwo7BJmRUhyzCw/Capture.PNG"><img class="raspberry" src="https://dl2.pushbulletusercontent.com/kSU3J6GEHIFSaumourBwo7BJmRUhyzCw/Capture.PNG" alt="#" title="#"/></a>
+        </span>
+        <h3 id="configuration"><p>Configuration de la langue sur Retropie</p></h3>
+        <span clas=text>
+            <p>Avant d'aller plus loin, nous allons mettre RetroPie en Français et mettre le clavier en azerty.
+                Branchez le Raspberry à un écran sans oublier de le brancher à une source d'alimentation.
+                Pour être plus à l'aise je branche le raspberry à un écran d'ordinateur, ce qui est plus confortable pour la configuration que l'écran 3,5" prévu pour la console.
+                Branchez un clavier et tapez "sudo raspi-config", sélectionnez "Internationalisation Options".</p>
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979014-retropie-internationalisation.png">
+            <p>Puis sur le second menu, sélectionnez "Change Local".</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979044-retropie-changelocale.png">
+            <p>Dans le troisième menu il va vous falloir sélectionner les jeux de langues souhaités. Avec les flèches directionnelles descendez dans le menu jusqu'à la ligne "en_GB.UTF-8 UTF-8et" cochez-la si ce n'est pas déjà fait avec la touche Espace. Un astérisque devrait apparaître entre les crochets.
+                Descendez jusqu'à la ligne "fr_FR.UTF-8 UTF-8" et cochez-la avec Espace. Faites-en de même pour "fr_FR@euro ISO-8859-15" et "fr_FR ISO-8859-1". Déplacez-vous sur le champs "OK" à l'aide de la touche Tab, puis validez avec Entrée.</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979056-retropie-local-ok.png">
+            <p>Sur l'écran d'après, sélectionnez comme langue par défaut "fr_FR.UTF-8 UTF-8" et avec Tab rendez-vous sur "OK" puis validez.
+                Des lignes de commandes vont une fois encore s'exécuter, une fois ceci fait vous serez de retour sur le menu de configuration (qui sera peut-être encore en anglais, c'est normal, il faudra reboot).</p>    
+            <p>Configurer son clavier en AZERTY:<br>
+                <br>
+                Toujours sur le panel de configuration, sélectionnez l'option 4 "Internationalisation Options".</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553980730-retropie-keyboard-fr-internationalisation-option.png">
+            <p>Sélectionnez l'option I3 "Change Keyboard Layout".</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979111-retropie-keyboard-fr-changekeyboardlayout.png">
+            <p>Sélectionnez l'option "PC Générique 105 touches (intl)".</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979130-retropie-keyboard-fr-generique-105.png">
+            <p>Choisissez tout simplement "Français".</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979145-retropie-keyboard-fr-francais.png">
+            <p>Pour la touche AltGr choisissez "Disposition par défaut".</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979181-retropie-keyboard-fr-altgr.png">
+            <p>Sélectionnez "Pas de touche compose".</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979158-retropie-keyboard-fr-compose.png">
+            <p>N'attribuez pas de raccourci pour arrêter le serveur X.</p>    
+                <img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553979198-retropie-keyboard-fr-ctrl-alt-ret.png">
+            <a href="https://hiob.fr/configurer-retropie/"><p>(Source hiob.fr)</p></a>  
+        </span>
+        <h3 id="roms"><p>L'installation des ROMs</p></h3>
+        <span clas=text>
+            <p>Il est désormais temps d'installer les ROMs sur le Raspberry. Mais qu'est-ce qu'un ROM, où peut-on en trouver et comment l'installer ?
+                Pour répondre à ces questions de la meilleure manière qui soit je vous recommande fortement ce tutoriel qui vous épargnera de la difficulté.</p> 
+                <a target="_blank" href="https://hiob.fr/retropie-roms/"><img class="raspberry" src="https://image.noelshack.com/fichiers/2019/13/6/1553981314-roms.png" alt="#" title="Tutoriel ROMs"/></a> 
+        </span>
+        <h3 id="configurationSup"><p>Configurations supplémentaires sur Retropie</p></h3>
+        <span clas=text>
+            <p>Pour une console digne de ce nom il faut aller jusqu'au bout et ne pas lésigner sur les détails. Vous l'avez surement remarqué, quand on allume le raspberry et que Retropie se lance,
+                le démarage n'est pas très ésthétique et pour améliorer cela je vous recommande de masquer le texte de démarage en suivant les indications de cette vidéo.</p>
+                <iframe class="vidéo" width="560" height="315" src="https://www.youtube.com/embed/KGf225Qb02I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p>Vous pouvez également changer le splashscreen en téléchargeant un d'eux beaucoup plus sympa que celui disponible nativement. Pour les plus motiver, vous pouvez en créer un pour aller jusqu'au bout de la
+                personnalisation de votre console. C'est ce que j'ai fait personnellement, rien d'extrodinaire mais ca coute rien. En effet n'importe quel logiciel de montage suffit,
+                faite une vidéo courte pour ne pas rendre infernaux les démarages de votre console,
+                enregistez ensuite en format .mp4, enfin suivez ce tutoriel vidéo pour l'intégrer à votre console.</p>
+                <iframe class="vidéo" width="560" height="315" src="https://www.youtube.com/embed/U-uQCo6aT_4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                <p>Mon splashscreen :</p>
+                <video width="560" height="315" class="vidéo" controls="controls"> <source src="img/Splash Screen/Splash screen gametop.mp4" type="video/mp4" /> Votre navigateur ne supporte pas le tag <video> </video>
+        </span>
+    </div>
+
+    <h2></h2>
+    <script>$(function(){
+            $("#monBouton").click(function(){
+                $("html, body").animate({scrollTop: 0},"slow");
+            });
+        });</script>
+</strong>
+</div>
+</body>
+<footer>
+    <img id="monBouton" src="img/arrow-up.svg" height="30px"width="30px"/>
+    <a class="contact" href="Flapping Gametop/index.html"><p class="footer"><strong>Ethan Mamane - Amin Hach - Timothée Chevalier</strong></p></a>
+    <p class="footer">Projet d'ISN 2019</p>
+</footer>
+</html>
