@@ -2,7 +2,7 @@ var prevScrollpos = window.pageYOffset;
 
 window.onscroll = function () {
   var currentScrollPos = window.pageYOffset;
-  if (document.documentElement.clientWidth > 630){
+  if (document.documentElement.clientWidth > 60){
     if (prevScrollpos < currentScrollPos) {
       document.getElementById("header").style.maxHeight = "60px";
       try{  //try pour pas qu'il y ait d'erreur si "errorBox" a pas encore été créé

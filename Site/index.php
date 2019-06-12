@@ -3,7 +3,7 @@
     { 
         session_start(); 
     } 
-    $title = "iComment";
+    $title = "Gametop";
     require "header.php";
 ?>
 

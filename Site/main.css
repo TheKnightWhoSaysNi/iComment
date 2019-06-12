@@ -400,14 +400,33 @@ section p{
 }
 #commentPost{
     min-height: 80px;
-    width: 99%;
+    width: 96%;
     resize: vertical;
     background-color: rgb(233, 233, 233);
-    padding: 10px 0 10px 10px;
+    padding: 10px 10px 10px 10px;
     margin-bottom: 10px;
 }
-#postContainer form div input[type=radio]{
-    margin: 0 5px 0 20px;
+
+#postContainer form input[type=file]{
+    margin: 0 0 10px 0;
+}
+
+#postContainer form div{
+    flex-direction: row;
+}
+#postContainer form div div{
+    margin: 0 0 10px 0;
+    flex-direction: column;
+    width: 50%;
+}
+#postContainer form div div h3 span{
+    font-size: 15px;
+    color: rgb(150, 0, 0);
+    /* height: 16px; */
+    margin: 6px 2px auto 2px;
+}
+#cover{
+    margin: 0 auto 0 auto;
 }
 #commentBtn{
     width: 100px;
@@ -424,7 +443,7 @@ footer{
     display: block;
     margin: 0;
     width: 100%;
-    background-color: orange;
+    background-color: var(--aux-color-1);
 }
 
 .deleteBtn{

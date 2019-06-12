@@ -51,7 +51,7 @@
 
         <div>
             
-            <a href="index.php" id="logo">iComment</a>
+            <a href="index.php" id="logo">Gametop</a>
 
             <ul class="navBar">
 
@@ -93,7 +93,7 @@
             <h2 id='username'> <?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2>
 
             <form id="searchBar" action="search.php" method="post" name="search" autocomplete="off">
-                <input type="text" name="search" id="textInput" placeholder="Search for a website" onfocusin="if(window.innerWidth < 1050){openSearch()}" onfocusout="if(window.innerWidth < 1050){closeSearch()}">
+                <input type="text" name="search" id="textInput" placeholder="Search for a game" onfocusin="if(window.innerWidth < 1050){openSearch()}" onfocusout="if(window.innerWidth < 1050){closeSearch()}">
                 <button type="submit" name="submit-search" id="searchButton">⌕</button>
             </form>
 
