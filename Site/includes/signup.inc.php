@@ -31,8 +31,7 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
         if (!mysqli_stmt_prepare($stmt, $sql)) { //mysli_stmt_prepare($stmt, $sql) = True quand ca marche donc si ca marche pas...
             header("Location: ../?error=sqlerror");
             exit();
-        }
-        else{
+        } else {
             mysqli_stmt_bind_param($stmt, "s", $email); //on envoie une string (s)   on vérifie si l'uid est pas déja pris
             mysqli_stmt_execute($stmt);
             mysqli_stmt_store_result($stmt);

@@ -335,7 +335,17 @@ section p{
     align-content: flex-start;
 }
 
-.searchResults h1{
+.searchResults img{
+    width: 100px;
+    height: 145px;
+    padding-right: 10px;
+}
+.searchResults div{
+    flex-wrap: wrap;
+    align-content: flex-start;
+    max-width: calc(100% - 120px);
+}
+.searchResults div h1{
     color: var(--aux-color-1);
     text-decoration: none;
     border-bottom: solid 2px var(--aux-color-0);
@@ -343,8 +353,8 @@ section p{
     height: 24px;
     font-size: 24px;
 }
-
-.searchResults h2{
+.searchResults div h2{
+    align-self: end;
     margin: 10px 0 0 20px;
     width: 100%;
     color: rgb(49, 49, 49);
@@ -352,11 +362,11 @@ section p{
     overflow: hidden;
 }
 
-.searchResults h3{
+.searchResults div h3{
     margin: 7px 0 0 20px;
     color: grey;
     font-size: 15px;
-
+    max-height: 30px;
 }
 
 .resultsSeparator{
@@ -449,6 +459,7 @@ footer{
 .deleteBtn{
     margin-left: auto;
     background-color: none;
+    height: 30px;
 }
 
 .deleteBtn button{

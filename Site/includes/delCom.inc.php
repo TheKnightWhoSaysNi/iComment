@@ -36,6 +36,7 @@ if (isset($_POST['delete-comment'])){ //il faudrait vérifier le nom de l'utilis
         }
     }
 
+    exit();
 
 } else {
     header("Location: ../index.php");

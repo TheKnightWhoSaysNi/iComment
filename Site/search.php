@@ -27,7 +27,7 @@
     
         require 'includes/dbh.inc.php'; //on se connecte à la base de donnée
         
-        $sql = "SELECT aId, aWebsite, aUrl FROM articles;";
+        $sql = "SELECT aId, aGame, aConsole FROM games;";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)){
             header("Location: ../?error=sqlerror");
@@ -40,15 +40,15 @@
 
             while($row = mysqli_fetch_assoc($result)){
                 // print_r($row); //jusque la ca marche
-                $levWebsite = levenshtein($search, $row["aWebsite"], 1, 1, 1); //levenshtein est une fonction qui donne la distance de levenshtein entre deux str, plus elles se ressemblent plus la distance est faible, on peut ajuster le coût d'une insertion, remplacement et déletion pour avoir les meilleurs résultats, aussi str1 et str2 >= 255 lettres
-                $levUrl = levenshtein($search, $row["aUrl"], 1, 1, 1);
-                // print_r($levWebsite . " ET " . "$levUrl"); //jusque la ca marche aussi
-                if($levWebsite > $levUrl){
-                    //array_push($array, $row["aId"], $levUrl); // comme append()
-                    $array = $array + array($row["aId"] => $levUrl);
+                $levGame = levenshtein($search, $row["aGame"], 1, 1, 1); //levenshtein est une fonction qui donne la distance de levenshtein entre deux str, plus elles se ressemblent plus la distance est faible, on peut ajuster le coût d'une insertion, remplacement et déletion pour avoir les meilleurs résultats, aussi str1 et str2 >= 255 lettres
+                $levConsole = levenshtein($search, $row["aConsole"], 1, 1, 1);
+                // print_r($levGame . " ET " . "$levConsole"); //jusque la ca marche aussi
+                if($levGame > $levConsole){
+                    //array_push($array, $row["aId"], $levConsole); // comme append()
+                    $array = $array + array($row["aId"] => $levConsole);
                 } else {
-                    //array_push($array, $row["aId"], $levWebsite); //mais ca marche pas avec les dictionnaires.....
-                    $array = $array + array($row["aId"] => $levWebsite);
+                    //array_push($array, $row["aId"], $levGame); //mais ca marche pas avec les dictionnaires.....
+                    $array = $array + array($row["aId"] => $levGame);
                 }
             }
             asort($array); //a pour dire trier par la valeur (arsort pour décroissant)
@@ -67,7 +67,7 @@
                     }
                     $i += 1;
                     //print_r($key);
-                    $sql = "SELECT aWebsite, aComment, aUrl FROM articles WHERE aId=?";
+                    $sql = "SELECT aGame, aCover, aConsole, aComment FROM games WHERE aId=?";
                     if (!mysqli_stmt_prepare($stmt, $sql)){
                         header("Location: ../?error=sqlerror");
                         exit();
@@ -80,32 +80,35 @@
                     
                 ?>
                     <a class="searchResults" href=<?php echo "site.php?n=" . $key ?> >
-                        <h1>
-                            <?php if(strlen($row["aWebsite"]) <= 18){
-                                    echo $row["aWebsite"];
-                                } else {
-                                    echo substr($row["aWebsite"], 0, 15) . "..."; //si le titre est trop long on le racourcit
-                                }
-                            ?>
-                        </h1> 
-                        <h3>
-                            <?php
-                                if(strlen($row["aUrl"]) <= 40){
-                                    echo $row["aUrl"];
-                                } else {
-                                    echo substr($row["aUrl"], 0, 37) . "..."; //si le titre est trop long on le racourcit
-                                } 
-                            ?>
-                        </h3>
-                        <h2>
-                            <?php
-                                if(strlen($row["aComment"]) <= 150){
-                                    echo $row["aComment"];
-                                } else {
-                                    echo substr($row["aComment"], 0, 147) . "..."; //si le titre est trop long on le racourcit
-                                }
-                            ?>
-                        </h2>
+                        <img src="<?php echo $row["aCover"] ?>" alt="game cover">
+                        <div>
+                            <h1>
+                                <?php if(strlen($row["aGame"]) <= 18){
+                                        echo $row["aGame"];
+                                    } else {
+                                        echo substr($row["aGame"], 0, 15) . "..."; //si le titre est trop long on le racourcit
+                                    }
+                                ?>
+                            </h1> 
+                            <h3>
+                                <?php
+                                    if(strlen($row["aConsole"]) <= 40){
+                                        echo $row["aConsole"];
+                                    } else {
+                                        echo substr($row["aConsole"], 0, 37) . "..."; //si le titre est trop long on le racourcit
+                                    } 
+                                ?>
+                            </h3>
+                            <h2>
+                                <?php
+                                    if(strlen($row["aComment"]) <= 800){
+                                        echo $row["aComment"];
+                                    } else {
+                                        echo substr($row["aComment"], 0, 797) . "..."; //si le titre est trop long on le racourcit
+                                    }
+                                ?>
+                            </h2>
+                        </div>
                     </a> 
                 <?php
                 }
@@ -117,7 +120,7 @@
                 echo "<h1>No result.</h1>";
             }
             if(isset($_SESSION["userUid"])){ ?>
-                <a class="noresultBtn" href=<?php echo "post.php?website=" . $_GET['s'];?> ><p>You can add one yourself</p></a>
+                <a class="noresultBtn" href=<?php echo "post.php?name=" . $_GET['s'];?> ><p>You can add one yourself</p></a>
             <?php
             } else { ?>
                 <a class="noresultBtn" href="#login"><p>Sign in to add one yourself</p></a>

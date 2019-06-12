@@ -1,0 +1,189 @@
+h1
+{
+    background-color: white;
+    color: #363535;
+    font-size: 70px;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    text-align: center;
+}
+.menu
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.menu li
+{
+    float: left;
+}
+
+.menu li a
+{
+    font-size: 20px;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menu li a:hover {
+    background-color: #111;
+}
+a
+{
+    text-decoration: none;
+    color: #363535;
+} 
+a:hover
+{
+    color:#919191;
+}
+.logo
+{
+    display: block;
+    margin-right:auto;
+    margin-left: auto;
+    width: 100px;
+    height: 65px;
+}
+span
+{
+    color: #363535;
+    font-size: 15px;
+    font-weight: inherit;
+}
+.image1
+{
+    margin-top: 90px;
+    display: block;
+    margin-right:auto;
+    margin-left: auto;
+    width: 300px;
+    height: 195px;
+}
+.table
+{
+    margin-top: 90px;
+    font-size: 20px;
+    color: #363535;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    text-decoration: none;
+}
+.sousParties
+{
+    color: #363535; 
+    margin-left: 50px;
+    text-decoration: none;
+}
+
+.intro
+{
+    margin-top: 90px;
+    font-size: 20px;
+    text-align: center;
+    color: #363535;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+footer
+{
+    margin-top: 800px;
+    text-align: center;
+    color: #363535;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    text-decoration: none;
+}
+.contact
+{
+    color: #363535;
+    text-decoration: none;
+}
+a:hover
+{
+    color: #919191;
+}
+#blockpage
+{
+    width: 950px;
+    display: block;
+    margin: auto;
+    width: 900px;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+#bodybis
+{
+    margin-top: 80px;
+    color: #363535;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+#matériel:hover
+{
+    color: #919191;
+}
+h3
+{
+    font-size: 30px;
+}
+h4
+{
+    font-size: 45px;
+    color: #363535;
+    text-align: center;
+
+}
+h5
+{
+    font-size: 20px;
+    color: #363535;
+
+}
+.raspberry
+{
+    display:block;
+    width:auto;
+    margin-left:auto;
+    margin-right:auto;
+}
+.raspberry2
+{
+    margin-top: 50px;
+    display:block;
+    width:auto;
+    margin-left:auto;
+    margin-right:auto;
+}
+li
+{
+    text-decoration: none;
+    color: #363535;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    
+}
+ul
+{
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+#monBouton
+{
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+.lien
+{
+    text-decoration: none;
+    color: #363535
+}
+.lien:hover
+{
+    color:#919191;
+}
+.vidéo
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

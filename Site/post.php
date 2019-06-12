@@ -11,6 +11,8 @@
     if(isset($_GET['comment'])){
         $comment = $_GET['comment'];
     } else {$comment = '';}
+
+
 ?>
 
 <script src="post.js"></script>
@@ -20,7 +22,7 @@
 <section>
 
     <div id="postContainer">
-        <form autocomplete="off" action="includes/post.inc.php" method="post">
+        <form autocomplete="off" action="includes/post.inc.php" method="post" enctype="multipart/form-data">
             <input type="text" autocomplete="off" name="name" placeholder="Game's name" required value="<?php echo $name ?>" class="postInfo">
             <div>
                 <div>
@@ -34,8 +36,23 @@
             </div>
             <div>
                 <h3>Import the game: </h3>
-                <input type="file" name="gameFile" required>
+                <input type="file" name="game" accept=".rar,.zip" required>
             </div>
+
+            <div>
+                <h3>Pick a console</h3>
+                <input name="console" list="consoles" required>
+                <datalist id="consoles">
+                    <?php
+                        foreach ($consoles as $console) { ?>
+                            <option value="<?php echo $console ?>">
+                        <?php }
+                    ?>
+                    
+                </datalist>
+            </div>
+            
+            
             
             <button type="submit" name="post-submit" id="commentBtn">Post</button>
         </form>
@@ -44,5 +61,5 @@
 </section>
 
 <?php
-    require "footer.php";
+    require "footer.php";   
 ?>

@@ -32,6 +32,8 @@
     }
     
     */
+
+    $consoles = array("Atari 2600", "mam cab", "nes", "snes");
 ?>
 
 <!DOCTYPE html>
@@ -160,6 +162,15 @@
             else if($error == "notowncom"){
                 $errorText = "No hun, you can't delete someone else's comment";
             }
+            else if($error == "covertoobig"){
+                $errorText = "Cover image is max 1Mo"; 
+            }
+            else if($error == "gamenotarchive"){
+                $errorText = "Game file must be .rar or .zip"; 
+            }
+            else if($error == "nameTaken"){
+                $errorText = "We already have this game"; 
+            }
             else{
                 $errorText = "Erreur SQL: fix -> bitly.com/98K8eH";
             }
@@ -179,6 +190,8 @@
                 $successText = "Posted";
             } else if($success == "delCom"){
                 $successText = "Post successfully deleted";
+            } else if($success == "upload"){
+                $successText = "Successfully uploaded";
             } else {$successtext = "http://bitly.com/98K8eH";}
         }
 
