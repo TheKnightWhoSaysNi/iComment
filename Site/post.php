@@ -26,7 +26,7 @@
             <input type="text" autocomplete="off" name="name" placeholder="Game's name" required value="<?php echo $name ?>" class="postInfo">
             <div>
                 <div>
-                    <h3>Import a cover for the game <span>must be around 20:29</span>:</h3>
+                    <h3>Import a cover for the game:</h3>
                     <input type="file" name="cover" accept="image/jpeg, image/png" required onchange="readURL(this); document.getElementById('commentPost').rows = 18;">
                     <img id="cover" src="#" alt="your image" style="display: none;" />
                 </div>
@@ -44,6 +44,7 @@
                 <input name="console" list="consoles" required>
                 <datalist id="consoles">
                     <?php
+                        $consoles = array("snes", "nes", "game boy", "atari 2600");
                         foreach ($consoles as $console) { ?>
                             <option value="<?php echo $console ?>">
                         <?php }

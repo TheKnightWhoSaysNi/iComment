@@ -1,10 +1,6 @@
 <?php
-    if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    }
+    if(!isset($_SESSION)){ session_start(); }
 
-    
     if (!isset($_POST['search'])){
         if (!isset($_GET["s"])){
             header("Location: index.php");
@@ -77,10 +73,23 @@
                     $result = mysqli_stmt_get_result($stmt);
                     $row = mysqli_fetch_assoc($result);
                     //print_r($row);
-                    
+                    $console = $row["aConsole"];
                 ?>
                     <a class="searchResults" href=<?php echo "site.php?n=" . $key ?> >
-                        <img src="<?php echo $row["aCover"] ?>" alt="game cover">
+                        <img src="<?php echo $row["aCover"] ?>" alt="game cover" style="<?php //meme chose dans accound et search donc faut changer l'autre si on change celui la
+                            if(strtolower($console) == "nes"){
+                                echo "width: 100px; height: 150px;";
+                            } elseif(strtolower($console) == "snes") {
+                                echo "width: 150px; height: 100px;";
+                            } elseif(strtolower($console) == "atari 2600"){
+                                echo "width: 100px; height: 125px;";
+                            } elseif(strtolower($console) == "game boy"){
+                                echo "width: 125px; height: 125px;";
+                            }
+                            echo "'";
+                    ?>
+                        
+                        ">
                         <div>
                             <h1>
                                 <?php if(strlen($row["aGame"]) <= 18){

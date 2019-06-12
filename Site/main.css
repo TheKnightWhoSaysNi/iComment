@@ -429,12 +429,7 @@ section p{
     flex-direction: column;
     width: 50%;
 }
-#postContainer form div div h3 span{
-    font-size: 15px;
-    color: rgb(150, 0, 0);
-    /* height: 16px; */
-    margin: 6px 2px auto 2px;
-}
+
 #cover{
     margin: 0 auto 0 auto;
 }
@@ -477,6 +472,37 @@ footer{
 /* #accountSection h1{
 
 } */
+
+
+#gamesSection{
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-bottom: 20px;
+}
+#consoleName{
+    width: 100%;
+    height: 30px;
+    margin: 10px 0 5px 15px;
+}
+#gamesSection h1{
+    color: var(--aux-color-1);
+    height: 28px;
+    border-bottom: solid 2px var(--aux-color-0);
+}
+
+#gamesSection a{
+    margin: 5px;
+}
+#gamesSection a:hover{
+    
+}
+#gamesSection a img{
+    width: 100%;
+    height: 100%;
+    border: solid 1px var(--aux-color-0);
+    border-radius: 6px;
+}
 
 @supports not (backdrop-filter: blur(5px)) {
     .glass{

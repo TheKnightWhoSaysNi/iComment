@@ -27,9 +27,23 @@ require "header.php";
         $result = mysqli_stmt_get_result($stmt);
         $i = 0;
         while($row = mysqli_fetch_assoc($result)){
+            $console = $row["aConsole"];
             ?>
             <a class="searchResults" href=<?php echo "site.php?n=" . $row["aId"] ?> >
-                <img src="<?php echo $row["aCover"] ?>" alt="Game cover">
+                <img src="<?php echo $row["aCover"] ?>" alt="game cover" style="<?php //meme chose dans accound et search donc faut changer l'autre si on change celui la
+                            if(strtolower($console) == "nes"){
+                                echo "width: 100px; height: 150px;";
+                            } elseif(strtolower($console) == "snes") {
+                                echo "width: 150px; height: 100px;";
+                            } elseif(strtolower($console) == "atari 2600"){
+                                echo "width: 100px; height: 125px;";
+                            } elseif(strtolower($console) == "game boy"){
+                                echo "width: 125px; height: 125px;";
+                            }
+                            echo "'";
+                    ?>
+                ">
+
                 <div>
                     <h1>
                         <?php if(strlen($row["aGame"]) <= 18){

@@ -6,7 +6,7 @@
         session_start(); 
     } 
 
-    include 'includes/dbh.inc.php';
+    
     if(isset($_GET['uid'])){
         $uid = $_GET['uid'];
         //echo "<h1>CA MARCHE</h1>";
@@ -33,7 +33,10 @@
     
     */
 
-    $consoles = array("Atari 2600", "mam cab", "nes", "snes");
+    include 'includes/dbh.inc.php';
+
+    
+    
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +44,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php echo $title; ?></title>
+    <title style="display: none"><?php echo $title; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
@@ -58,8 +61,8 @@
             <ul class="navBar">
 
                 <!-- Pas de balise <a href=""> </a>  parceque c'est plus simple de centrer le texte en ayant une grande hitbox -->
-                <li onclick="location.href='#about';" id="aboutBtn">
-                    <p>About</p>
+                <li onclick="location.href='games.php';" id="aboutBtn">
+                    <p>Games</p>
                 </li>
                 <?php
                 if (isset($_SESSION['userId'])){ ?>
