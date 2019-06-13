@@ -45,18 +45,7 @@
                 <?php
                 while($row = mysqli_fetch_assoc($result)){ ?>
                     
-                    <a href=<?php echo "game.php?id=" . $row['aId'] . " style='";
-                    if(strtolower($console) == "nes"){
-                        echo "width: 200px; height: 300px;";
-                    } elseif(strtolower($console) == "snes") {
-                        echo "width: 300px; height: 200px;";
-                    } elseif(strtolower($console) == "atari 2600"){
-                        echo "width: 200px; height: 250px;";
-                    } elseif(strtolower($console) == "game boy"){
-                        echo "width: 225px; height: 225px;";
-                    }
-                    echo "'";
-                    ?> >
+                    <a href=<?php echo "game.php?id=" . $row['aId'] ?> <?php cover_size($console, 150); ?> >
                         <img src="<?php echo $row["aCover"]; ?>" alt="Image">
                     </a>
 
