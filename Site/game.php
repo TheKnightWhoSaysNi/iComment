@@ -9,7 +9,7 @@
     }
 
     require "includes/dbh.inc.php";
-    $sql = "SELECT aGame, aCover, aComment, aGame, aConsole FROM games WHERE aId=?";
+    $sql = "SELECT aGame, aCover, aComment, aFile, aConsole FROM games WHERE aId=?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)){
         header("Location: index.php?error=sqlerror");
@@ -31,6 +31,7 @@
 
     <h1><?php echo $row['aGame'] ?></h1>
     <img src="<?php echo $row['aCover'] ?> " alt="Game cover" <?php cover_size($row['aConsole'], 200) ?> class="gameCover" >
+    <a href="<?php echo $row["aFile"] ?>" class="downloadBtn" download> <p>Download</p> </a>
 
 </section>
 

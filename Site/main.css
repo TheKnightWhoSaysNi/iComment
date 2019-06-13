@@ -338,7 +338,7 @@ section p{
 .searchResults img{
     width: 100px;
     height: 145px;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 .searchResults div{
     flex-wrap: wrap;
@@ -507,6 +507,19 @@ footer{
     height: 100%;
     border: solid 1px var(--aux-color-0);
     border-radius: 6px;
+}
+
+.downloadBtn{
+    border: solid 1px var(--aux-color-0);
+    border-radius: 4px;
+    width: 125px;
+    font-size: 20px;
+    text-decoration: none;
+}
+.downloadBtn p{
+    text-align: center;
+    margin: 0 auto;
+    color: var(--aux-color-0);
 }
 
 @supports not (backdrop-filter: blur(5px)) {

@@ -1,14 +1,20 @@
 <?php //on utilisera un php procédural parceque je comprend pas l'object oriented
 
 if(isset($_POST['post-submit'])) {  //la plupart des commentaires pour ce code sont dans signup.inc.php parceque flemme   isset($_POST['post-submit'])
-    require 'dbh.inc.php';
-
+    
     if(!isset($_SESSION)) { session_start(); }
+    include 'dbh.inc.php';
+    include "../consoles.php";
 
     $name = $_POST["name"];
     $console = $_POST["console"];
 
     if(isset($_POST["comment"])){ $aComment = $_POST["comment"]; }   
+
+    if(!in_array($console, $consoles)){
+        header("Location: ../post.php?error=consolenotsupported&name=" . $name . "&comment=" . $aComment);
+        exit();
+    }
 
     $imgPath = "img/";
     $gamePath = "games/";
