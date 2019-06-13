@@ -338,7 +338,7 @@ section p{
 .searchResults img{
     width: 100px;
     height: 145px;
-    padding-right: 10px;
+    margin-right: 10px; 
 }
 .searchResults div{
     flex-wrap: wrap;
@@ -451,6 +451,11 @@ footer{
     background-color: var(--aux-color-1);
 }
 
+.gameCover{
+    border-radius: 4px;
+    border: solid 1px var(--aux-color-0);
+}
+
 .deleteBtn{
     margin-left: auto;
     background-color: none;
@@ -466,7 +471,7 @@ footer{
     cursor: pointer;
 }
 .deleteBtn button:hover{
-    background-color: var(--aux-color-0);
+    background-color: rgb(255, 60, 60);
 }
 
 /* #accountSection h1{

@@ -30,7 +30,7 @@
 <section>
 
     <h1><?php echo $row['aGame'] ?></h1>
-    <img src="<?php echo $row['aCover'] ?> " alt="Game cover" <?php cover_size($row['aConsole'], 200) ?> >
+    <img src="<?php echo $row['aCover'] ?> " alt="Game cover" <?php cover_size($row['aConsole'], 200) ?> class="gameCover" >
 
 </section>
 

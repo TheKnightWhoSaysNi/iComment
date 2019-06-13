@@ -223,5 +223,4 @@
 
         echo "style='width: " . $w . "px; height: " . $h . "px;'";
     }
-?>
 

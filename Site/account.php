@@ -30,7 +30,7 @@ require "header.php";
             $console = $row["aConsole"];
             ?>
             <a class="searchResults" href=<?php echo "site.php?n=" . $row["aId"] ?> >
-                <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($console, 100) ?>>
+                <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($console, 100) ?> class="gameCover">
 
                 <div>
                     <h1>

@@ -76,20 +76,7 @@
                     $console = $row["aConsole"];
                 ?>
                     <a class="searchResults" href=<?php echo "site.php?n=" . $key ?> >
-                        <img src="<?php echo $row["aCover"] ?>" alt="game cover" style="<?php //meme chose dans accound et search donc faut changer l'autre si on change celui la
-                            if(strtolower($console) == "nes"){
-                                echo "width: 100px; height: 150px;";
-                            } elseif(strtolower($console) == "snes") {
-                                echo "width: 150px; height: 100px;";
-                            } elseif(strtolower($console) == "atari 2600"){
-                                echo "width: 100px; height: 125px;";
-                            } elseif(strtolower($console) == "game boy"){
-                                echo "width: 125px; height: 125px;";
-                            }
-                            echo "'";
-                    ?>
-                        
-                        ">
+                        <img src="<?php echo $row["aCover"] ?>" alt="game cover" class="gameCover" <?php cover_size($console, 100) ?> >
                         <div>
                             <h1>
                                 <?php if(strlen($row["aGame"]) <= 18){
