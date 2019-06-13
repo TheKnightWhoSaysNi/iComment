@@ -155,16 +155,12 @@ header div{
     border: solid 1px var(--aux-color-0);
     border-radius: 3px;
     font-family: Roboto, sans-serif;
-    top: 150px;
-    overflow-x: scroll;
-
-/*
-    left: 50%;
-    margin-left: -19.5%;
-
-
-*/
-
+    top: 200px;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 .log form{
@@ -177,7 +173,7 @@ header div{
     width: 400px;
     min-width: 100px;
     margin: 10px 0;
-    background: none;
+    background-color: rgb(233, 233, 233);
     outline: none;
     border: solid 1px var(--aux-color-0);
     border-radius: 3px;
