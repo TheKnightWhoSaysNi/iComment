@@ -1,6 +1,6 @@
 <?php
 
-function cover_size($console, $size){ //détermine les dimensions de la miniature d'un jeu.
+function cover_size($console, $size, $additional = Null){ //détermine les dimensions de la miniature d'un jeu.
 
     $consoles = array(
         "nes" => "20:29",
@@ -10,14 +10,13 @@ function cover_size($console, $size){ //détermine les dimensions de la miniatur
         "atari 2600" => "4:5"
     );
 
-    $ratio = $consoles[$console];
-    $ratio = explode(":", $ratio);
-    $w = $ratio[0];
-    $h = $ratio[1];
+    $ratio = explode(":", $consoles[$console]);
+        $w = $ratio[0];
+        $h = $ratio[1];
 
     if ($w != $h){
 
-        if($w > $h){
+        if( ($w > $h) || ($additional == "sameHeight") && ($additional != "sameWidth")){
             $w = intval($w / $h * $size);
             $h = $size;
         }
