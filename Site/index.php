@@ -14,9 +14,8 @@
 
     <h1>Latest games:</h1>
     <div id="latestGames">
-        
         <div>
-
+            
             <?php
 
             $sql = "SELECT aId, aCover, aConsole FROM games ORDER BY aId DESC"; //on prend les derniers jeux
@@ -37,9 +36,11 @@
                     $i += 1;
                 }
             }
-        
         ?>
+            
+
         </div>
+            
 
     </div>
 

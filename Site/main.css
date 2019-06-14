@@ -19,7 +19,7 @@
     transition: .1s;
 }
 
-::-webkit-scrollbar {
+:not(#latestGames)::-webkit-scrollbar {
     width: 0;
     background-color: transparent;
 }

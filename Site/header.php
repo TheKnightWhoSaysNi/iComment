@@ -17,6 +17,7 @@
 
     include 'includes/dbh.inc.php';
     include "consoles.php";
+    // print_r($consoles);
 
 ?>
 

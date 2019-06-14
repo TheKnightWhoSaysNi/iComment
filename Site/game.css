@@ -1,0 +1,15 @@
+#gameSection{
+    flex-direction: column;
+}
+h1{
+    height: 50px;
+    width: 100%;
+}
+
+img{
+    margin-right: 10px;
+}
+
+.downloadBtn{
+    margin-left: auto;
+}

@@ -26,11 +26,16 @@
 
 ?>
 
+<link rel="stylesheet" href="game.css">
 
-<section>
+<section id="gameSection">
 
     <h1><?php echo $row['aGame'] ?></h1>
-    <img src="<?php echo $row['aCover'] ?> " alt="Game cover" <?php cover_size($row['aConsole'], 200) ?> class="gameCover" >
+    <div>
+        <img src="<?php echo $row['aCover'] ?> " alt="Game cover" <?php cover_size($row['aConsole'], 200) ?> class="gameCover" >
+        <p><?php echo $row["aComment"] ?></p>
+    </div>
+    
     <a href="<?php echo $row["aFile"] ?>" class="downloadBtn" download> <p>Download</p> </a>
 
 </section>

@@ -16,7 +16,7 @@ require "header.php";
 
     require "includes/dbh.inc.php";
     $user = $_SESSION["userUid"];
-    $sql = "SELECT aId, aGame, aConsole, aComment, aCover FROM games WHERE aAuthor=?;";
+    $sql = "SELECT aId, aGame, aConsole, aComment, aCover FROM games WHERE aAuthor=? ORDER BY aId DESC;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)){
         header("Location: ../?error=sqlerror");
