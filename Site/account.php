@@ -16,7 +16,7 @@ require "header.php";
 
     require "includes/dbh.inc.php";
     $user = $_SESSION["userUid"];
-    $sql = "SELECT aId, aGame, aConsole, aComment, aCover FROM games WHERE aAuthor=? ORDER BY aId DESC;";
+    $sql = "SELECT aId, aGame, aConsole, aComment, aCover FROM games WHERE aAuthor=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)){
         header("Location: ../?error=sqlerror");
@@ -52,7 +52,7 @@ require "header.php";
                     </h3>
                     
                     <form class="deleteBtn" action="includes/delCom.inc.php" method="post">
-                            <button type="submit" name="delete-comment" value="<?php echo $row['aId'] ?>">Delete</button>
+                        <button type="submit" name="delete-comment" value="<?php echo $row['aId'] ?>">Delete</button>
                     </form>
 
                     <h2>

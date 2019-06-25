@@ -36,7 +36,7 @@ body{
 }
 
 header{
-    z-index: 2;
+    z-index: 100;
     flex-direction: row;
     position: fixed;
     width: 100%;
@@ -397,14 +397,18 @@ section p{
     flex-direction: column;
 }
 
+#postContainer form .postInfo{
+    padding-left: 10px;
+}
+
 #postContainer form .postInfo, #commentPost, #commentBtn{
     outline: none;
     border: solid 1px var(--aux-color-0);
     border-radius: 4px;
-    padding-left: 10px; 
     font-size: 15px;
     font-family: Roboto, sans-serif;
 }
+
 .postInfo{
     height: 40px;
     width: 99%;
@@ -435,16 +439,35 @@ section p{
 
 #cover{
     margin: 0 auto 0 auto;
+    max-width: 300px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
 }
 #commentBtn{
     width: 100px;
     height: 40px;
-    background-color: var(--aux-color-0);
+    background-color: none;
     margin: 0 0 0 auto;
     text-align: center;
+    color: rgb(92, 92, 92);
 }
+
 #commentBtn:hover{
-    background-color: rgb(134, 59, 255);
+    background-color: rgb(176, 128, 255);
+}
+
+#commentBtn p{
+    margin: 0 auto;
+    height: 100%;
+    padding: 0;
+}
+
+h3{
+    font-family: Roboto, sans-serif;
+    font-weight: 425;
+    padding-right: 10px;
+    color: rgb(70, 70, 70);
 }
 
 footer{
@@ -485,7 +508,7 @@ footer{
 #gamesSection{
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: flex-start;
+    align-content: &flex-start;
     margin-bottom: 20px;
 }
 #consoleName{

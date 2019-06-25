@@ -4,7 +4,7 @@ if (isset($_POST['delete-comment'])){ //il faudrait vérifier le nom de l'utilis
     $id = $_POST["delete-comment"];
     require 'dbh.inc.php';
 
-    $sql = "SELECT aAuthor FROM articles WHERE aId=?";
+    $sql = "SELECT aAuthor FROM games WHERE aId=?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("Location: ../?error=sqlerror");
@@ -22,7 +22,7 @@ if (isset($_POST['delete-comment'])){ //il faudrait vérifier le nom de l'utilis
             header("Location: ../?error=notowncom");
             exit();
         } else {
-            $sql = "DELETE FROM articles WHERE aId=?";
+            $sql = "DELETE FROM games WHERE aId=?";
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)) {
                 header("Location: ../?error=sqlerror");

@@ -2,14 +2,65 @@
     flex-direction: column;
 }
 h1{
-    height: 50px;
+    height: 40px;
     width: 100%;
 }
 
+div{
+    flex-direction: row;
+}
+
+h2{
+    width: 100%;
+    color: grey;
+}
+
+div div{
+    flex-direction: column;
+}
+
 img{
-    margin-right: 10px;
+    margin: 0 15px 0 10px;
+}
+
+#rate{
+    margin: 15px 0 0 50px;
+}
+
+input[type=radio] {
+    display:none;
+}
+
+input[type=radio] + label img {
+    height: 50px;
+    width: 50px;
+    filter: grayscale(100%);
+
+} 
+input[type=radio]:checked + label img {
+    filter: grayscale(0%);
+} 
+
+label img{
+    
 }
 
 .downloadBtn{
     margin-left: auto;
+    height: 40px;
+}
+.downloadBtn:hover{
+    background-color: rgb(80, 200, 80);
+}
+.downloadBtn:hover p{
+    color: white;
+}
+.downloadBtn button{
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+}
+.downloadBtn button p{
+    margin: 0 auto;
 }

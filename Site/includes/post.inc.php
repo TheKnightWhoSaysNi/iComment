@@ -1,9 +1,5 @@
 <?php //on utilisera un php procédural parceque je comprend pas l'object oriented
 
-//php.ini =>
-//upload_max_filesize=20M
-//post_max_size=21M
-
 if(isset($_POST['post-submit'])) {  //la plupart des commentaires pour ce code sont dans signup.inc.php parceque flemme   isset($_POST['post-submit'])
     
     if(!isset($_SESSION)) { session_start(); }
@@ -13,7 +9,7 @@ if(isset($_POST['post-submit'])) {  //la plupart des commentaires pour ce code s
     $name = $_POST["name"];
     $console = $_POST["console"];
 
-    if(isset($_POST["comment"])){ $aComment = $_POST["comment"]; }   
+    if(isset($_POST["comment"])){ $aComment = $_POST["comment"]; }
 
     if(!isset($consoles[$console])){
         header("Location: ../post.php?error=consolenotsupported&name=" . $name . "&comment=" . $aComment);
@@ -23,8 +19,11 @@ if(isset($_POST['post-submit'])) {  //la plupart des commentaires pour ce code s
     $imgPath = "img/";
     $gamePath = "games/";
     
-    $imgTarget = $imgPath . $name . "." . pathinfo($_FILES["cover"]["name"], PATHINFO_EXTENSION);
+    $imgTarget = $imgPath . basename($_FILES["cover"]["name"]);
+    $imgTarget = str_replace(" ", "-", $imgTarget); //on enlève les espaces
+
     $gameTarget = $gamePath . $name . "." . pathinfo($_FILES["game"]["name"], PATHINFO_EXTENSION);
+    $gameTarget = str_replace(" ", "-", $gameTarget);
 
     if(isset($_GET["comment"])){
         $comment = "&comment=" . $_GET["comment"];
