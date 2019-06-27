@@ -7,46 +7,107 @@
 
 body{
     max-width: 100%;
-    overflow-x: hidden;
 }
 
-#top{
-    width: 100%;
+h1{
+    font-family: Roboto, sans-serif;
+    color: rgb(78, 78, 78);
+}
+
+section{
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+section div{
+    flex-direction: column;
+    width: 49%;
+    
+}
+
+#top div{
     min-height: 500px;
-    justify-content: space-evenly;
     align-items: center;
-    padding-bottom: 50px;
+    padding-bottom: -50px;
+    padding: auto;
+    flex-direction: row;
+
 }
 
-#top a{
+#top input[type=radio] {
+    display: none;
+}
+
+#top input[type=radio] + label {
+    
     flex-direction: column;
 }
 
-#top p{
+#top input[type=radio] + label img{
+    border-radius: 6px;
+    border: solid 1px var(--aux-color-0);
+}
+
+#top input[type=radio] + label a{
     margin: 0 auto;
+    font-size: 30px;
+    color: rgb(61, 61, 61);
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+    font-weight: 600;
+}
+
+#top input[type=radio]:checked + label {
+    z-index: 4;
+    transform: perspective(400px) rotateY(0deg) scale(1.1);
+    
+}
+#top input[type=radio]:checked + label #top1, #top2{
+    transform: perspective(400px) rotateY(0deg) scale(1.15);
+    filter: brightness(90%);
+}
+
+#top input[type=radio]:hover + label{
+    filter: brightness(110%);
 }
 
 #top1{
-    flex-grow: 2;
     order: 2;
-}
-#top2{
-    flex-grow: 1;
-    order: 1;
-} 
-#top3{
-    flex-grow: 1;
-    order: 3;
+    position: relative;
+    left: 0px;
+    z-index: 3;
+    transform: scale(1);
 }
 
-#latestGames{
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    overflow: auto;
+#top2{
+    order: 1;
+    position: relative;
+    left: 50px;
+    z-index: 2;
+    transform: perspective(400px) rotateY(22deg) scale(0.9);
+}
+
+#top3{
+    order: 3;
+    position: relative;
+    left: -50px;
+    z-index: 1;
+    transform: perspective(400px) rotateY(-22deg) scale(0.9);
+
+}
+
+#latestGames div{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    max-height: 310px;
+    overflow: hidden;
 }
 
 #latestGames a{
-    padding: 0 5px 10px 5px;
+    padding: 0 5px 5px 0;
 }
 
 #latestGames a img{
@@ -60,4 +121,39 @@ body{
     filter: brightness(110%);
     width: 102%;
     height: 102%;
+}
+
+#latestGames button{
+    width: 50%;
+    margin: 0 auto;
+    height: 40px;
+    bottom: -50px;
+    outline: none;
+    border: solid 1px var(--aux-color-0);
+    border-radius: 4px;
+}
+#latestGames button:hover{
+    background-color: rgb(188, 188, 235);
+}
+
+#latestGames button p{
+    margin: 0 auto;
+    height: 100%;
+    transform: rotate(90deg);
+    font-size: 30px;
+    color: rgb(80, 80, 80);
+}
+
+@media only screen and (max-width: 1200px){
+    section{
+        flex-direction: column;
+    }
+    section div, div{
+        width: 100%;
+        margin: 0 auto;
+    }
+    #top div{
+        width: auto;
+        padding-left: -222px;
+    }
 }

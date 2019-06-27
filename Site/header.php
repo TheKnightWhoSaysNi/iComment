@@ -1,22 +1,47 @@
 <!-- crtl + / pour commenter une ligne (vStudio) -->
 
 <?php
-    if(!isset($_SESSION)){ session_start(); } 
+
+    include 'includes/dbh.inc.php';
+    include "consoles.php";
+
+    if(!isset($_SESSION)){ session_start(); }
+
+    //on vérifie que l'utilisateur a bien confirmé son email
+    else {
+        $sql = "SELECT confirmed FROM users WHERE idUsers=?;";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)){
+            header("Location: ?error=sqlerror");
+            exit();
+        } else {
+            mysqli_stmt_bind_param($stmt, "s", $_SESSION["userId"]); //on le met deux fois parcequ'il y a deux spaceholders dans $sql 
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            if (($rowEmail = mysqli_fetch_assoc($result)) && ($rowEmail["confirmed"] != "1") && ($_GET["confirmEmail"] != "true") ) {
+                header("Location: index.php?confirmEmail=true");
+                exit();
+            }
+        }
+    }
 
     
     if(isset($_GET['uid'])){
         $uid = $_GET['uid'];
-        //echo "<h1>CA MARCHE</h1>";
-    }else{$uid = '';}
+    } else {$uid = '';}
+    
     if(isset($_GET['mail'])){
         $mail = $_GET['mail'];
-    }else{$mail = '';}
+    } else {$mail = '';}
+    
     if(isset($_GET['error'])){
         $error = $_GET['error'];
-    }else{$error = '';}
+    } else {$error = '';}
 
-    include 'includes/dbh.inc.php';
-    include "consoles.php";
+    if(isset($_GET['confirmationCode'])){
+        $confirmationCode = $_GET['confirmationCode'];
+    } else { $confirmationCode = ""; }
+    
 
 ?>
 
@@ -112,10 +137,15 @@
     </div>
 
     <div id="confirmEmail" class="log glass">
-        <form method="post">
-            <input type="text" name="confirmationCode" placeholder="Confirmation code">
-            <button type="submit" name="signup-submit">Confirm</button>
+        <a href="" class="closeBtn">X</a>
+        <h3>Activate your account with the code you've received by email: </h3>
+
+        <form method="post" action="includes/login.inc.php">
+            <input type="text" name="confirmationCode" placeholder="Confirmation code" value="<?php echo $confirmationCode ?>">
+            <button type="submit" name="confirmationCode-submit"> <p> Confirm </p> </button>
         </form>
+
+        <h4>Check your spam inbox or type "lazy" to skip</h4>
     </div>
 
     <?php if($error){
@@ -156,7 +186,13 @@
                 $errorText = "We already have this game"; 
             }
             else if($error == "consolenotsupported"){
-                $errorText = "Sorry we do not support this console yet"; 
+                $errorText = "Sorry we do not support this console yet";  
+            }
+            else if($error == "accountNotVerified"){
+                $errorText = "Verify your account before you do anything else"; 
+            }
+            else if($error == "emailError"){
+                $errorText = "Failed sending the email, keep in mind that it won't work the website is running on a local server"; 
             }
             else{
                 $errorText = "Erreur SQL: fix -> bitly.com/98K8eH";
@@ -179,7 +215,9 @@
                 $successText = "Post successfully deleted";
             } else if($success == "upload"){
                 $successText = "Successfully uploaded";
-            } else {$successtext = "http://bitly.com/98K8eH";}
+            } else if($success == "emailVerified"){
+            $successText = "Successfully verified";
+            } else {$successtext = "http://bitly.com/98K8eH";} 
         }
 
         if($error){ ?>

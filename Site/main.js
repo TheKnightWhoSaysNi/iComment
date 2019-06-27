@@ -75,14 +75,21 @@ window.onload = function () {
 
   if (window.location.href.includes("#login")) {
     document.getElementById("signup").style.display = "none";
+    document.getElementById("confirmEmail").style.display = "none";
     document.getElementById("login").style.display = "flex";
   }
   else if (window.location.href.includes("#signup")) {
     document.getElementById("login").style.display = "none";
+    document.getElementById("confirmEmail").style.display = "none";
     document.getElementById("signup").style.display = "flex";
     if (!window.location.href.includes("error")) {
       document.getElementById('content-blocker-holder').innerHTML = "<div id='content-blocker'><div id = 'signup-warning'><p>We did not spend anything on security, please chose a unique password!</p><button id='warning-button' onclick='removeContentBlocker()'>I understand</button></div></div>";
     }
+  }
+  else if (window.location.href.includes("confirmEmail")) { 
+    document.getElementById("signup").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("confirmEmail").style.display = "flex";
   }
   else {
     document.getElementById("login").style.display = "none";
@@ -114,7 +121,7 @@ window.onhashchange = function(){
       document.getElementById('content-blocker-holder').innerHTML = "<div id='content-blocker'><div id = 'signup-warning'><p>We did not spend anything on security, please chose a unique password!</p><button id='warning-button' onclick='removeContentBlocker()'>I understand</button></div></div>";
     }
   }
-  else if (window.location.href.includes("#confirmEmail")){
+  else if (window.location.href.includes("confirmEmail")){
     document.getElementById("signup").style.display = "none";
     document.getElementById("login").style.display = "none";
     document.getElementById("confirmEmail").style.display = "flex";

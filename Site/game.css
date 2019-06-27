@@ -1,9 +1,17 @@
+:root{
+    --aux-color-0: #8c7ae6; /*  = matt purple */
+    --aux-color-1: rgb(82, 82, 82);
+    --aux-color-2: rgba(159, 184, 218, 0.4); /* // tertiaire = je sais pas comment ca ça s'appelle */
+    --header-color: rgba(255, 255, 255, 0.6);
+}
+
 #gameSection{
     flex-direction: column;
 }
 h1{
     height: 40px;
     width: 100%;
+    color: rgb(83, 83, 83);
 }
 
 div{
@@ -12,7 +20,7 @@ div{
 
 h2{
     width: 100%;
-    color: grey;
+    color: var(--aux-color-0);
 }
 
 div div{
@@ -32,17 +40,17 @@ input[type=radio] {
 }
 
 input[type=radio] + label img {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
     filter: grayscale(100%);
+}
 
-} 
 input[type=radio]:checked + label img {
     filter: grayscale(0%);
 } 
 
-label img{
-    
+label{
+
 }
 
 .downloadBtn{

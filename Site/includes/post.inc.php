@@ -6,6 +6,29 @@ if(isset($_POST['post-submit'])) {  //la plupart des commentaires pour ce code s
     include 'dbh.inc.php';
     include "../consoles.php";
 
+    //on vérifie si l'utilisateur est bien validé
+
+    $sql = "SELECT confirmed FROM users WHERE idUsers=?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("Location: ../?error=sqlerror");
+        exit();
+    } else {
+
+
+        mysqli_stmt_bind_param($stmt, "s", $_SESSION["userId"]);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if ($row = mysqli_fetch_assoc($result){
+            if($row["confirmed"] != 1){
+                header("Location: ../index.php?error=accountNotVerified");
+                exit();
+            }
+        }
+    }
+
+    // si il est bien validé on le laisse poster
+
     $name = $_POST["name"];
     $console = $_POST["console"];
 

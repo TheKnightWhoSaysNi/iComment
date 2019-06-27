@@ -76,15 +76,14 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
                 mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashedPwd, $token); //on envoie 4 strings (ssss)
                 mysqli_stmt_execute($stmt);
                 
-
-                // mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashedPwd, $token); //on envoie 4 strings (ssss)
-                // mysqli_stmt_execute($stmt);
-                // if (!mail($email, "Activate your account. ", "Please activate your iComment with this code: ".$token." . " ,"From:no-reply@icomment.epizy.com")){ //mail(to, subject, message, headers)
-                //     header("Location: ../?error=emailError");
-                //     exit();
-                // } 
-                header("Location: ../?success=signup#login");
-                exit();
+                //on envoie un mot de passe pour vérifier l'utilisateur
+                $message = "Please activate your iComment with this code: " . $token . " . ";
+                if (!mail($email, "Activate your account. ", $message ,"From:no-reply@icomment.epizy.com")){ //mail(to, subject, message, headers)
+                    header("Location: ../?error=emailError");
+                    exit();
+                } else {
+                    header("Location: ../?success=signup#login");
+                }
             }
         }
     }

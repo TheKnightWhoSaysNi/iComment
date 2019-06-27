@@ -8,62 +8,86 @@
 ?>
 
 <link rel="stylesheet" href="index.css">
+<script >
+    var expanded = false;
+    function expandLatestGames() {
+    if (!expanded) {
+        document.getElementById("accordion").style.maxHeight = "930px";
+        document.getElementById("arrow").style.transform = "rotate(-90deg)";
+    }
+    else {
+        document.getElementById("accordion").style.maxHeight = "310px";
+        document.getElementById("arrow").style.transform = "rotate(90deg)";
+    }
+
+    expanded = !expanded;
+    }
+
+</script>
 <section id="indexSection">
 
     <div id="top">
+        <h1>Most downloaded:</h1>
+        <div>
+            <?php
+            $sql = "SELECT aId, aCover, aConsole FROM games ORDER BY aDownloads DESC"; //on prend les derniers jeux
+                $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql)){
+                    header("Location: ?error=sqlerror");
+                    exit();
+                } else {
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
 
-
-        <?php
-        $sql = "SELECT aId, aCover, aConsole FROM games ORDER BY aDownloads DESC"; //on prend les derniers jeux
-            $stmt = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($stmt, $sql)){
-                header("Location: ?error=sqlerror");
-                exit();
-            } else {
-                mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
-
-                
-                // #1
-                    $row = mysqli_fetch_assoc($result); ?>
-
-                    <a id='top1' href="<?php echo "game.php?id=" . $row["aId"] ?>">
-                        <img src="<?php echo $row["aCover"] ?>" alt="#1 cover" <?php cover_size($row['aConsole'], 400) ?> >
-                        <p>#1</p>
-                    </a>
                     
-                <?php
-                // #2
-                    $row = mysqli_fetch_assoc($result); ?>
-                    
-                    <a id="top2" href="<?php echo "game.php?id=" . $row["aId"] ?>">
-                        <img src="<?php echo $row["aCover"] ?>" alt="#2 cover" <?php cover_size($row['aConsole'], 300) ?> >
-                        <p>#2</p>
-                    </a>
+                    // #1
+                        $row = mysqli_fetch_assoc($result); ?>
 
-                <?php
-                // #3
-                    $row = mysqli_fetch_assoc($result); ?>
+                        <input type="radio" name="top" id="labelTop1" checked>
+                            <label id="top1" for="labelTop1">
+                                <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 250) ?>draggable="false">
+                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>">#1</a>
+                            </label>
 
-                    <a id="top3" href="<?php echo "game.php?id=" . $row["aId"] ?>">
-                        <img src="<?php echo $row["aCover"] ?>" alt="#3 cover" <?php cover_size($row['aConsole'], 250) ?> >
-                        <p>#3</p>
-                    </a>
+                        
+                    <?php
+                    // #2
+                        $row = mysqli_fetch_assoc($result); ?>
 
-                <?php
+                        <input type="radio" name="top" id="labelTop2">
+                            <label id="top2" for="labelTop2">
+                                <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 180) ?>draggable="false">
+                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>">#2</a>
+                            </label>
 
-            }
 
-        ?>
+                    <?php
+                    // #3
+                        $row = mysqli_fetch_assoc($result); ?>
+
+                        <input type="radio" name="top" id="labelTop3">
+                            <label id="top3" for="labelTop3">
+                                <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 160) ?>draggable="false">
+                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>" >#3</a>               
+                            </label>
+
+
+                    <?php
+
+                }
+
+            ?>
+        </div>
 
     </div>
 
 
 
-    <h1>Latest games:</h1>
+    
     <div id="latestGames">
-        
-        <div>
+
+        <h1>Latest games:</h1>
+        <div id="accordion">
 
             <?php
 
@@ -76,9 +100,9 @@
                 mysqli_stmt_execute($stmt);
                 $result = mysqli_stmt_get_result($stmt);
                 $i = 0;
-                while(($row = mysqli_fetch_assoc($result)) && ($i < 25)){ ?>
-                    <a href=<?php echo "game.php?id=" . $row['aId'] ?> <?php cover_size($row["aConsole"], 150, "sameHeight"); ?> >
-                        <img src="<?php echo $row["aCover"]; ?>" alt="Image">
+                while(($row = mysqli_fetch_assoc($result)) && ($i < 14)){ ?>
+                    <a href=<?php echo "game.php?id=" . $row['aId'] ?> <?php cover_size($row["aConsole"], 150, "sameHeight"); ?> draggable="false">
+                        <img src="<?php echo $row["aCover"]; ?>" alt="Image" draggable="false">
                     </a>
 
                 <?php
@@ -87,7 +111,10 @@
             }
         
         ?>
+        
         </div>
+
+        <button onclick="expandLatestGames()"><p id="arrow">»</p></button>
 
     </div>
 

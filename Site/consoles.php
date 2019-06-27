@@ -14,7 +14,7 @@ function cover_size($console, $size, $additional = Null){ //détermine les dimen
         $w = $ratio[0];
         $h = $ratio[1];
     if ($w != $h){
-        if( ($w > $h) || ($additional == "sameHeight") ){
+        if( ($w > $h) || ($additional == "sameHeight") && ($additional != "sameWidth") ){
             $w = intval($w / $h * $size);
             $h = $size;
         }
