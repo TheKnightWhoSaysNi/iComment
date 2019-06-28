@@ -75,10 +75,89 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
 
                 mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashedPwd, $token); //on envoie 4 strings (ssss)
                 mysqli_stmt_execute($stmt);
+
+                //on connecte automatiquement l'utilisateur puisqu'on a 
+
+                session_start();
+                $_SESSION['userId'] = $row['idUsers'];
+                $_SESSION['userUid'] = $row['uidUsers'];
+                header("Location: ../?success=login");
+                exit();
                 
                 //on envoie un mot de passe pour vérifier l'utilisateur
-                $message = "Please activate your iComment with this code: " . $token . " . ";
-                if (!mail($email, "Activate your account. ", $message ,"From:no-reply@icomment.epizy.com")){ //mail(to, subject, message, headers)
+                $message = '
+
+                    <!DOCTYPE html>
+                    <html>
+                        <meta charset="utf-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <title>Confirm your Gametop account!</title>
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                        <style>
+
+                            body * {
+                                display: flex;
+                                flex-direction: column;
+                                font-family: Roboto, sans-serif;
+                                color: rgb(83, 83, 83);
+                            }
+
+                            section{
+                                width: 400px;
+                                height: 500px;
+                                margin: auto;
+                                text-align: center;
+                                background-color: #f3f3f3;
+                                border: solid 1px #8c7ae6;
+                                border-radius: 4px;
+                            }
+                        
+                            h1{
+                                font-weight: 300;
+                            }
+
+                            a{
+                                height: 50px;
+                                width: 100px;
+                                background-color: #ccc2ff;
+                                border: solid 1px #8c7ae6;
+                                border-radius: 4px;
+                                text-decoration: none;
+                                margin: 0 auto;
+                                transition: .1s;
+                            }
+                            a:hover{
+                                background-color: white;
+                            }
+                            a p{
+                                margin: auto;
+                            }
+                            h2{
+                                font-size: 15px;
+                            }
+                            h2 span{
+                                color: rgb(218, 67, 67);
+                            }
+                        
+                        </style>
+                    <body>
+
+                        <section>
+
+                            <h1>You have successfully created your Gametop account!</h1>
+
+                            <a href="http://gametop.epizy.com?confirmEmail=' . $token . '"><p>Verify account</p></a>
+
+                            <h2>If the button doesn\'t work use this code: <span>' . $token . '</span></h2>
+
+                        </section>
+                        
+                    </body>
+                    </html>
+
+                    ';
+
+                if (!mail($email, "Activate your account. ", $message ,"From:no-reply@gametop.epizy.com\r\n" . "Content-Type: text/html; charset=ISO-8859-1\r\n")){ //mail(to, subject, message, headers)
                     header("Location: ../?error=emailError");
                     exit();
                 } else {
@@ -92,5 +171,6 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
 }
 else{
     header("Location: ../");  //si l'utilisateur a accédé a ce programme avec l'url on le redirige vers la page d'inscription
-    exit();
 }
+
+exit();

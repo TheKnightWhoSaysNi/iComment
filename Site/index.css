@@ -5,8 +5,8 @@
     --header-color: rgba(255, 255, 255, 0.6);
 }
 
-body{
-    max-width: 100%;
+html, body {
+    overflow-x: hidden; 
 }
 
 h1{
@@ -55,6 +55,8 @@ section div{
     text-decoration: none;
     font-family: Roboto, sans-serif;
     font-weight: 600;
+    flex-direction: column;
+    text-align: center;
 }
 
 #top input[type=radio]:checked + label {
@@ -133,7 +135,7 @@ section div{
     border-radius: 4px;
 }
 #latestGames button:hover{
-    background-color: rgb(188, 188, 235);
+    background-color: var(--aux-color-2);
 }
 
 #latestGames button p{

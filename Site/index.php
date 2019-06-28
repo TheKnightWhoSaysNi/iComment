@@ -8,7 +8,9 @@
 ?>
 
 <link rel="stylesheet" href="index.css">
-<script >
+
+<script type="application/javascript" style="display: none">
+    
     var expanded = false;
     function expandLatestGames() {
     if (!expanded) {
@@ -23,7 +25,16 @@
     expanded = !expanded;
     }
 
+    //quand on clique sur un 'top' selectionné on est mené sur la page du jeu mais sinon on le selectionne
+    function click(o){
+        alert(o);
+        if(document.getElementById(o).checked){
+            alert("caca");
+        } else { alert("pipi")}
+    }
+
 </script>
+
 <section id="indexSection">
 
     <div id="top">
@@ -44,9 +55,9 @@
                         $row = mysqli_fetch_assoc($result); ?>
 
                         <input type="radio" name="top" id="labelTop1" checked>
-                            <label id="top1" for="labelTop1">
+                            <label onclick='if(document.getElementById("labelTop1").checked == true){ window.location.href = "game.php?id=<?php echo $row["aId"] ?>"; }' id="top1" for="labelTop1">
                                 <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 250) ?>draggable="false">
-                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>">#1</a>
+                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>">1</a>
                             </label>
 
                         
@@ -55,9 +66,9 @@
                         $row = mysqli_fetch_assoc($result); ?>
 
                         <input type="radio" name="top" id="labelTop2">
-                            <label id="top2" for="labelTop2">
+                            <label onclick='if(document.getElementById("labelTop2").checked == true){ window.location.href = "game.php?id=<?php echo $row["aId"] ?>"; }' id="top2" for="labelTop2">
                                 <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 180) ?>draggable="false">
-                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>">#2</a>
+                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>">2</a>
                             </label>
 
 
@@ -66,9 +77,9 @@
                         $row = mysqli_fetch_assoc($result); ?>
 
                         <input type="radio" name="top" id="labelTop3">
-                            <label id="top3" for="labelTop3">
+                            <label onclick='if(document.getElementById("labelTop3").checked == true){ window.location.href = "game.php?id=<?php echo $row["aId"] ?>"; }' id="top3" for="labelTop3">
                                 <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 160) ?>draggable="false">
-                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>" >#3</a>               
+                                <a href="<?php echo "game.php?id=" . $row["aId"] ?>" >3</a>               
                             </label>
 
 

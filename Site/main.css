@@ -122,7 +122,7 @@ header div{
     margin: auto 0 auto auto;
     border: solid 1px var(--aux-color-0);
     border-radius: 4px;
-    background-color: none;
+    background-color: rgb(233, 233, 233);
     padding-left: 10px;
 }
 
@@ -237,7 +237,7 @@ header div{
 
 #content-blocker{
     position: fixed;
-    z-index: 6;
+    z-index: 101;
     width: 100vw;
     height: 100vw;
     top: 0;
@@ -364,6 +364,7 @@ section p{
     flex-wrap: wrap;
     align-content: flex-start;
     max-width: calc(100% - 120px);
+    overflow: hidden;
 }
 .searchResults div h1{
     color: var(--aux-color-1);
@@ -377,9 +378,10 @@ section p{
     align-self: end;
     margin: 10px 0 0 20px;
     width: 100%;
-    color: rgb(49, 49, 49);
+    color: rgb(68, 68, 68);
     font-size: 17px;
     overflow: hidden;
+    max-height: 120px;
 }
 
 .searchResults div h3{
@@ -542,7 +544,7 @@ footer p{
 #gamesSection{
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: &flex-start;
+    align-content: flex-start;
     margin-bottom: 20px;
 }
 #consoleName{
@@ -591,9 +593,6 @@ footer p{
     .glass{
         background-color: rgb(233, 233, 233);
     }
-    #searchBar{
-        background-color: rgb(233, 233, 233);
-    }
     #signup-warning{
         background-color: rgba(255, 55, 55, 0.856);
     }
@@ -610,9 +609,6 @@ footer p{
         background-color: var(--header-color);
         backdrop-filter: blur(10px);  
         -webkit-backdrop-filter: blur(10px);
-    }
-    #searchBar{
-        background-color: transparent;
     }
     #errorBox{
         background-color: rgba(255, 0, 0, 0.5);

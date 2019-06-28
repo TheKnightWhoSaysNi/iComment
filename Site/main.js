@@ -34,8 +34,8 @@ function removeContentBlocker() {
 function openSearch(){
   document.getElementById("searchBar").style.width = "300px";
   document.getElementById("textInput").style.width = "250px";
+  document.getElementById("textInput").placeholder = "Search for a game";
   document.getElementById("searchButton").style.display = "flex";
-  document.getElementById("searchBar").style.backgroundColor = "rgb(233, 233, 233)";
   if(window.innerWidth > 360){
     document.getElementById("searchButton").style.width = "50px";
   } else {
@@ -47,8 +47,8 @@ function openSearch(){
 function closeSearch(){
   document.getElementById("searchBar").style.width = "100px";
   document.getElementById("textInput").style.width = "100px";
+  document.getElementById("textInput").placeholder = "Search";
   document.getElementById("searchButton").style.display = "none";
-  document.getElementById("searchBar").style.backgroundColor = "transparent";
   document.getElementById("searchButton").style.width = "0px";
   if (window.innerWidth <= 360) {
     document.getElementById("logo").style.display = "flex";

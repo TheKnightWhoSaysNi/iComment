@@ -18,8 +18,8 @@
             mysqli_stmt_bind_param($stmt, "s", $_SESSION["userId"]); //on le met deux fois parcequ'il y a deux spaceholders dans $sql 
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
-            if (($rowEmail = mysqli_fetch_assoc($result)) && ($rowEmail["confirmed"] != "1") && ($_GET["confirmEmail"] != "true") ) {
-                header("Location: index.php?confirmEmail=true");
+            if (($rowEmail = mysqli_fetch_assoc($result)) && ($rowEmail["confirmed"] != "1") && (!isset($_GET["confirmEmail"]) ) ) {
+                header("Location: index.php?confirmEmail=");
                 exit();
             }
         }
@@ -38,8 +38,8 @@
         $error = $_GET['error'];
     } else {$error = '';}
 
-    if(isset($_GET['confirmationCode'])){
-        $confirmationCode = $_GET['confirmationCode'];
+    if(isset($_GET['confirmEmail'])){
+        $confirmationCode = $_GET['confirmEmail'];
     } else { $confirmationCode = ""; }
     
 
@@ -138,7 +138,7 @@
 
     <div id="confirmEmail" class="log glass">
         <a href="" class="closeBtn">X</a>
-        <h3>Activate your account with the code you've received by email: </h3>
+        <h3>Activate your account with the code you have received by email: </h3>
 
         <form method="post" action="includes/login.inc.php">
             <input type="text" name="confirmationCode" placeholder="Confirmation code" value="<?php echo $confirmationCode ?>">
