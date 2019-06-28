@@ -1,0 +1,77 @@
+:root{
+    --aux-color-0: #8c7ae6; /*  = matt purple */
+    --aux-color-1: rgb(82, 82, 82);
+    --aux-color-2: rgba(159, 184, 218, 0.4); /* // tertiaire = je sais pas comment ca ça s'appelle */
+    --header-color: rgba(255, 255, 255, 0.6);
+}
+
+section *{
+    color: var(--aux-color-1);
+}
+
+#postedGames{
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#accordion{
+    height: 500px;
+    overflow-y: scroll;
+    border: var(--aux-color-0) solid 1px;
+    border-radius: 4px;
+    padding: 0 0 10px 0;
+    margin-top: 5px;
+    flex-direction: column;
+}
+
+.resultsSeparator{
+    padding: 0.5px 0;
+    width: 100%;
+}
+
+.searchResults{
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.searchResults img{
+    margin-left: 10px;
+}
+
+#text{
+    width: 85%;
+}
+
+.buttons{
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 15px auto;
+}
+
+
+@media only screen and (max-width: 1300px) {
+    #text{
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #text{
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    #text{
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    #text{
+        width: 50%;
+    }
+    #text div{
+        width: 100%;
+    }
+}

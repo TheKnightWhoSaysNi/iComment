@@ -1,4 +1,12 @@
-<!-- crtl + / pour commenter une ligne (vStudio) -->
+<!-- crtl + / pour commenter une ligne
+
+    header.php: header de la page, ainsi que les éléments communs à chaque page:
+        
+        -la liste des notifications
+        -les popups de connexion/inscription/verification du mail
+        -le haut de la page avec le logo, la barre de navigation et de recherche
+
+-->
 
 <?php
 
@@ -15,17 +23,17 @@
             header("Location: ?error=sqlerror");
             exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "s", $_SESSION["userId"]); //on le met deux fois parcequ'il y a deux spaceholders dans $sql 
+            mysqli_stmt_bind_param($stmt, "s", $_SESSION["userId"]);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             if (($rowEmail = mysqli_fetch_assoc($result)) && ($rowEmail["confirmed"] != "1") && (!isset($_GET["confirmEmail"]) ) ) {
-                header("Location: index.php?confirmEmail=");
+                header("Location: index.php?confirmEmail="); //si l'utilisateur a pas un compte vérifié on le redirige vers un url qui active la popup de verification
                 exit();
             }
         }
     }
 
-    
+    // on récupère les variables de l'url
     if(isset($_GET['uid'])){
         $uid = $_GET['uid'];
     } else {$uid = '';}
@@ -33,6 +41,10 @@
     if(isset($_GET['mail'])){
         $mail = $_GET['mail'];
     } else {$mail = '';}
+
+    if(isset($_GET['mailuid'])){
+        $mailuid = $_GET['mailuid'];
+    } else { $mailuid = ""; }
     
     if(isset($_GET['error'])){
         $error = $_GET['error'];
@@ -54,7 +66,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
-    <meta name="theme-color" content="rgb(233, 233, 233)" />
+    <meta name="theme-color" content="rgb(233, 233, 233)" /> <!-- couleur du haut de l'onglet sur chrome sur mobile -->
 </head>
 <body>
 
@@ -71,7 +83,7 @@
                     <p>Games</p>
                 </li>
                 <?php
-                if (isset($_SESSION['userId'])){ ?>
+                if (isset($_SESSION['userId'])){ ?> <!-- le boutton post s'affique que si l'utilisateur est connecté -->
                     <li onclick="location.href='post.php';">
                         <p>Post</p>
                     </li> 
@@ -80,7 +92,7 @@
 
                 <?php
 
-                    if(strpos($_SERVER['REQUEST_URI'], 'account') !== false){ ?>
+                    if(strpos($_SERVER['REQUEST_URI'], 'account') !== false){ ?> <!-- si on est sur la page account on le bouton "account" est remplacé par un bouton "logout" -->
                         <li onclick="location.href='includes/logout.inc.php';">
                             <p>Log out</p>
                         </li> <?php
@@ -92,7 +104,7 @@
                     } 
                     else { ?>
                         <li>
-                            <a href="#login" id="logBtn">
+                            <a href="#login" id="logBtn"> <!-- si on est pas connecté -->
                                 <p>Login / Sign Up</p>
                             </a>
                         </li><?php
@@ -101,8 +113,9 @@
                 
             </ul>
 
-            <h2 id='username'> <?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2>
+            <h2 id='username'> <?php if(isset($_SESSION['userUid'])){ echo "@" . $_SESSION['userUid'];}?></h2> <!-- si on est connecté on afiche le nom de l'utilisateur -->
 
+            <!-- barre de recherche -->
             <form id="searchBar" action="search.php" method="post" name="search" autocomplete="off">
                 <input type="text" name="search" id="textInput" placeholder="Search for a game" onfocusin="if(window.innerWidth < 1050){openSearch()}" onfocusout="if(window.innerWidth < 1050){closeSearch()}">
                 <button type="submit" name="submit-search" id="searchButton">⌕</button>
@@ -112,32 +125,38 @@
 
     </header>
 
+    <!-- popup de connexion -->
     <div id="login" class="log glass">
-        <a href="" class="closeBtn">X</a>
+        <a href="" class="closeBtn"><p>x</p></a>
         <form class='login' action='includes/login.inc.php' method='post'>
-            <input type='text' name='mailuid' placeholder='Username/Email...'>
-            <input type='password' name='pwd' placeholder='Password...'>
-            <button type='submit' name='login-submit'>Login</button>
-            <a href="#signup">Not signed up yet? Sign up here.</a>
+            <input type='text' name='mailuid' placeholder='Username/Email...' value="<?php echo $mailuid ?>" required>
+            <input type='password' name='pwd' placeholder='Password...' required>
+            <div>
+                <a href="#signup">Click here to sign up</a>
+                <button type='submit' name='login-submit'><p> Login </p></button>
+            </div>
         </form>
     </div>
     
-    
-    <div id="content-blocker-holder"></div>
+    <!-- popup d'inscription -->
     <div id="signup" class="log glass">
-        <a href="" class="closeBtn">X</a>
+        <a href="" class="closeBtn"><p>x</p></a>
         <form class="signup" action="includes/signup.inc.php" method="post">
-            <input type="text" name="uid" placeholder="Username..." value="<?php echo $uid ?>"/>
-            <input type="text" name="mail" placeholder="Email..." value="<?php echo $mail ?>"/>
-            <input type="password" name="pwd" placeholder="Password...">
-            <input type="password" name="pwd-repeat" placeholder="Repeat Password...">
-            <button type="submit" name="signup-submit">Sign up</button>
-            <a href="#login">Already have an account? Log in here.</a>
+            <input type="text" name="uid" placeholder="Username..." value="<?php echo $uid ?>" required/>
+            <input type="text" name="mail" placeholder="Email..." value="<?php echo $mail ?>" required/>
+            <input type="password" name="pwd" placeholder="Password..." required>
+            <input type="password" name="pwd-repeat" placeholder="Repeat Password..." required>
+            <div>
+                <a href="#login">Click here to login</a>
+                <button type="submit" name="signup-submit"><p> Sign up </p></button>
+            </div>
         </form>
+
     </div>
 
+    <!-- popup de confirmation du compte -->
     <div id="confirmEmail" class="log glass">
-        <a href="" class="closeBtn">X</a>
+        <a href="" class="closeBtn"><p>x</p></a>
         <h3>Activate your account with the code you have received by email: </h3>
 
         <form method="post" action="includes/login.inc.php">
@@ -148,91 +167,62 @@
         <h4>Check your spam inbox or type "lazy" to skip</h4>
     </div>
 
-    <?php if($error){
-            if($error == "nouser"){
-                $errorText = "No such user.";
-            }
-            else if($error == "wrongpassword"){
-                $errorText = "Wrong password.";
-            }
-            else if($error == "emptyfields"){
-                $errorText = "Please fill all fields.";
-            }
-            else if($error == "invalidmail"){
-                $errorText = "Please use a valid Email.";
-            }
-            else if($error == "emailtaken"){
-                $errorText = "This email is taken.";
-            }
-            else if($error == "passwordcheck"){
-                $errorText = "Passwords don't match.";
-            }
-            else if($error == "usernametaken"){
-                $errorText = "The username is taken.";
-            }
-            else if($error == "websitenotreached"){
-                $errorText = "The url is not valid / could not be reached.";
-            }
-            else if($error == "notowncom"){
-                $errorText = "No hun, you can't delete someone else's comment";
-            }
-            else if($error == "covertoobig"){
-                $errorText = "Cover image is max 1Mo"; 
-            }
-            else if($error == "gamenotarchive"){
-                $errorText = "Game file must be .rar or .zip"; 
-            }
-            else if($error == "nameTaken"){
-                $errorText = "We already have this game"; 
-            }
-            else if($error == "consolenotsupported"){
-                $errorText = "Sorry we do not support this console yet";  
-            }
-            else if($error == "accountNotVerified"){
-                $errorText = "Verify your account before you do anything else"; 
-            }
-            else if($error == "emailError"){
-                $errorText = "Failed sending the email, keep in mind that it won't work the website is running on a local server"; 
-            }
-            else{
-                $errorText = "Erreur SQL: fix -> bitly.com/98K8eH";
-            }
-        }
+    <?php 
+
+    //notifications
+    $errors = array(
+        "nouser" => "No such user",
+        "wrongpassword" => "Wrong password",
+        "emptyfields" => "Please fill all fields",
+        "invalidmail" => "Please use a valid email",
+        "emailtaken" => "This email is taken",
+        "passwordcheck" => "Passwords do not match",
+        "usernametaken" => "The username is taken",
+        "notowncom" => "HMM well tried but you can only delete your own games",
+        "covertoobig" => "Game image can only be 1 Mo or less",
+        "gamenotarchive" => "Game file must be .rar or .zip",
+        "nameTaken" => "We already have this game",
+        "consolenotsupported" => "Sorry we do not support this console yet",
+        "accountNotVerified" => "Verify your account before you do anything else",
+        "emailError" => "Failed sending the email, keep in mind that it won't work the website is running on a local server",
+        "sqlerror" => "Something went wrong"
+    );
+    
+    $successes = array(
+        "signup" => "Signed in successfully!",
+        "login" => "Loged in successfully!",
+        "logout" => "Loged out successfully!",
+        "post" => "Posted",
+        "delCom" => "Post successfully deleted",
+        "upload" => "Successfully uploaded",
+        "emailVerified" => "Successfully verified"
+    );
+
+    if(isset($_GET['error'])){
+            $error = $_GET['error'];
+    } else {
+        $error = '';
         if(isset($_GET['success'])){
                 $success = $_GET['success'];
-        } else {$success = '';}
-
-        if($success){
-            if($success == "signup"){
-                $successText = "Signed in successfully!";
-            } else if($success == "login"){
-                $successText = "Loged in successfully!";
-            } else if($success == "logout"){
-                $successText = "Loged out successfully!";
-            } else if($success == "post"){
-                $successText = "Posted";
-            } else if($success == "delCom"){
-                $successText = "Post successfully deleted";
-            } else if($success == "upload"){
-                $successText = "Successfully uploaded";
-            } else if($success == "emailVerified"){
-            $successText = "Successfully verified";
-            } else {$successtext = "http://bitly.com/98K8eH";} 
+        } else {
+            $success = '';
         }
+    }
 
-        if($error){ ?>
-            <div id="errorBox" class="glass">
-                <a onclick="document.getElementById('errorBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('errorBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
-                <p><?php echo $errorText ?></p>
-            </div> <?php 
-        }
 
-        if($success){ ?>
-            <div id="successBox" class="glass">
-                <a onclick="document.getElementById('successBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('successBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
-                <p><?php echo $successText ?></p>
-            </div> <?php 
-        }
+    if($error){ ?>
+        <div id="errorBox" class="glass"> <!-- la notification disparait au bout de quelques secondes --> 
+            <a onclick="document.getElementById('errorBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('errorBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
+            <p><?php echo $errors[$error] ?></p>
+        </div> <?php 
+    }
+
+    else if($success){ ?>
+        <div id="successBox" class="glass">
+            <a onclick="document.getElementById('successBox').style.maxHeight = '0'; setTimeout(function() {document.getElementById('successBox').style.border = 'none'}, 300)">x</a> <!-- setTimeout(fonction, temps) c'est un peu comme un delay, pour pas qu'on voit un trait rouge apres la fermeture de la notification, mais que la bordure reste au moins jusqu'a ce qu'elle se soit barrée-->
+            <p><?php echo $successes[$success] ?></p>
+        </div> <?php 
+    }
 
 
 

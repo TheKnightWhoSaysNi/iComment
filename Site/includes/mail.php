@@ -1,3 +1,12 @@
+<!-- 
+
+    mail.php: apprecu du mail de vérification
+
+    ce fichier n'est appelé nulle part lors de l'utilisation du site.
+
+-->
+
+
 <?php $message = '
 
 <!DOCTYPE html>

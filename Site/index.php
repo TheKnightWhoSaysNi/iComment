@@ -1,3 +1,8 @@
+<!--  
+
+    index.php: page d'accueil du site
+
+-->
 <?php
     if(!isset($_SESSION)) { session_start(); } 
     
@@ -9,29 +14,9 @@
 
 <link rel="stylesheet" href="index.css">
 
-<script type="application/javascript" style="display: none">
+<script type="application/javascript" src="index.js" style="display: none">
     
-    var expanded = false;
-    function expandLatestGames() {
-    if (!expanded) {
-        document.getElementById("accordion").style.maxHeight = "930px";
-        document.getElementById("arrow").style.transform = "rotate(-90deg)";
-    }
-    else {
-        document.getElementById("accordion").style.maxHeight = "310px";
-        document.getElementById("arrow").style.transform = "rotate(90deg)";
-    }
-
-    expanded = !expanded;
-    }
-
-    //quand on clique sur un 'top' selectionné on est mené sur la page du jeu mais sinon on le selectionne
-    function click(o){
-        alert(o);
-        if(document.getElementById(o).checked){
-            alert("caca");
-        } else { alert("pipi")}
-    }
+    
 
 </script>
 
@@ -39,7 +24,7 @@
 
     <div id="top">
         <h1>Most downloaded:</h1>
-        <div>
+        <div onfocusout="document.getElementById('labelTop1').checked = true">
             <?php
             $sql = "SELECT aId, aCover, aConsole FROM games ORDER BY aDownloads DESC"; //on prend les derniers jeux
                 $stmt = mysqli_stmt_init($conn);
@@ -56,7 +41,7 @@
 
                         <input type="radio" name="top" id="labelTop1" checked>
                             <label onclick='if(document.getElementById("labelTop1").checked == true){ window.location.href = "game.php?id=<?php echo $row["aId"] ?>"; }' id="top1" for="labelTop1">
-                                <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 250) ?>draggable="false">
+                                <img src="<?php echo $row["aCover"] ?>" alt="Game cover" <?php cover_size($row["aConsole"], 260) ?>draggable="false">
                                 <a href="<?php echo "game.php?id=" . $row["aId"] ?>">1</a>
                             </label>
 
@@ -125,7 +110,7 @@
         
         </div>
 
-        <button onclick="expandLatestGames()"><p id="arrow">»</p></button>
+        <button onclick="expand()"><p id="arrow">»</p></button>
 
     </div>
 

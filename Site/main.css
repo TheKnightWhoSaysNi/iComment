@@ -28,6 +28,10 @@ head{
     display: none;
 }
 
+html, body {
+    overflow-x: hidden; 
+}
+
 body{
     flex-direction: column;
     width: 100%;
@@ -155,9 +159,9 @@ header div{
     left: 0;
     margin-right: auto;
     margin-left: auto;
-    padding: 50px;
+    padding: 5px 0 15px 0;
     flex-direction: column;
-    width: 500px;
+    width: 450px;
     border: solid 1px var(--aux-color-0);
     border-radius: 3px;
     font-family: Roboto, sans-serif;
@@ -205,7 +209,7 @@ header div{
     border: solid 1px var(--aux-color-1);
     background-color: var(--aux-color-0);
     border-radius: 3px;
-    margin-left: auto;
+    margin: 0 0px 0 auto;
     display: inline-flex;
     align-items: center
 }
@@ -214,7 +218,7 @@ header div{
     background-color: rgb(114, 197, 114);
 }
 
-.log form button p{
+button p{
     margin: 0 auto;
 }
 
@@ -228,11 +232,24 @@ header div{
     color: rgb(46, 46, 46);
 }
 
+.log div a{
+    margin: auto auto auto 3px;
+}
+
 .log .closeBtn{
+    width: 13px;
+    height: 13px;
+    text-align: center;
     position: relative;
-    top: -50px;
-    left: 270px; 
-    font-size: 20px;
+    left: 433px; 
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0;
+}
+.log .closeBtn p{
+    position: relative;
+    top: -8px;
+    margin: auto;
 }
 
 #content-blocker{
@@ -246,7 +263,7 @@ header div{
 #signup-warning{
     flex-direction: column;
     left: 100px;
-    margin: 300px auto auto auto;
+    margin: 210px auto auto auto;
     width: 100vw;
     min-height: 300px;
     background-color: rgba(255, 55, 55, 0.65);
@@ -324,9 +341,24 @@ header div{
 
 .glass{
     background-color: var(--header-color);
-    backdrop-filter: blur(10px);  
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
+
+/* .glass:before{
+
+    visibility: visible;
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    top: -5%;
+    bottom: -5%;
+    background: inherit;
+    -webkit-filter: url('#blur') saturate(2);
+    -moz-filter: url('#blur');
+    filter: url('#blur');
+} */
 
 section{
     width: 100%;
@@ -366,8 +398,12 @@ section p{
     max-width: calc(100% - 120px);
     overflow: hidden;
 }
-.searchResults div h1{
+
+h1{
     color: var(--aux-color-1);
+}
+
+.searchResults div h1{
     text-decoration: none;
     border-bottom: solid 2px var(--aux-color-0);
     max-width: 210px;
@@ -518,13 +554,14 @@ footer p{
     border: solid 1px var(--aux-color-0);
 }
 
-.deleteBtn{
+.deleteBtn, .editBtn{
     margin-left: auto;
     background-color: none;
     height: 30px;
+    width: 51px;
 }
 
-.deleteBtn button{
+.deleteBtn button, .editBtn button{
     outline: none;
     border: solid 1px var(--aux-color-0);
     border-radius: 4px;
@@ -533,7 +570,19 @@ footer p{
     cursor: pointer;
 }
 .deleteBtn button:hover{
-    background-color: rgb(255, 60, 60);
+    background-color: rgb(233, 89, 89);
+}
+.editBtn button{
+    width: 100px;
+}
+.editBtn button:hover{
+    background-color: var(--aux-color-2);
+}
+.editBtn button p{
+    text-align: center;
+    font-size: 13.3px;
+    padding: 0;
+    margin: 0 auto;
 }
 
 /* #accountSection h1{

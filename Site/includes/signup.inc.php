@@ -1,3 +1,10 @@
+<!-- 
+
+    signup.inc.php: permet de créer un nouvel utilisateur
+
+    on utilise des prepared statements pour empécher des 
+
+-->
 <?php
 if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en appuyant sur "s'inscrire" et pas en mettant juste l'url
     require 'dbh.inc.php'; //on se connecte à la base de donnée
@@ -7,12 +14,13 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
     $password = $_POST['pwd'];
     $passwordRepeat = $_POST['pwd-repeat'];
 
-    if(empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) { //si l'utilisateur a laissé une valeur vide
-        header("Location: ../?error=emptyfields&uid=".$username."&mail=".$email."#signup"); //on renvoie l'utilisateur sur la page en réécrivant les valeurs valides
+    if(empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) { //si l'utilisateur a laissé une valeur vide...
+        header("Location: ../?error=emptyfields&uid=".$username."&mail=".$email."#signup"); //...on le renvoie sur la page en réécrivant les valeurs valides
         exit(); //si il y a une erreur on continue pas le code
     }
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-z\d_]{2,20}$/i", $username)){ //si ni l'email ni le nom d'utilisateur est invalide \d pour n'importe quel chiffre {taille acceptée} i = on s'en fout des majuscules
         header("Location: ../?error=invalidmailuid"."#signup");
+        exit();
     }
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { //si l'email est invalide
         header("Location: ../?error=invalidmail&uid=".$username."#signup");
@@ -24,12 +32,13 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
     }
     else if ($password != $passwordRepeat){ //si les mdp correspondent pas
         header("Location: ../?error=passwordcheck&uid=".$username."&mail=".$email."#signup");
+        exit();
     }
     else{
         $sql = "SELECT emailUsers FROM users WHERE emailUsers=?";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) { //mysli_stmt_prepare($stmt, $sql) = True quand ca marche donc si ca marche pas...
-            header("Location: ../?error=sqlerror");
+            header("Location: ../?error=sqlerror"); //on est renvoyé avec une erreur
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $email); //on envoie une string (s)   on vérifie si l'uid est pas déja pris
@@ -76,7 +85,7 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
                 mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashedPwd, $token); //on envoie 4 strings (ssss)
                 mysqli_stmt_execute($stmt);
 
-                //on connecte automatiquement l'utilisateur puisqu'on a 
+                //on peux connecter automatiquement l'utilisateur parcequ'on a une vérification par mail
 
                 session_start();
                 $_SESSION['userId'] = $row['idUsers'];
@@ -87,7 +96,6 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
                 //on envoie un mot de passe pour vérifier l'utilisateur
                 $message = '
 
-                    <!DOCTYPE html>
                     <html>
                         <meta charset="utf-8">
                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -158,7 +166,7 @@ if (isset($_POST['signup-submit'])){ //si l'utilisateur est bien arrivé la en a
                     ';
 
                 if (!mail($email, "Activate your account. ", $message ,"From:no-reply@gametop.epizy.com\r\n" . "Content-Type: text/html; charset=ISO-8859-1\r\n")){ //mail(to, subject, message, headers)
-                    header("Location: ../?error=emailError");
+                    header("Location: ../?error=emailError"); //erreur si le mail s'envoie pas
                     exit();
                 } else {
                     header("Location: ../?success=signup#login");

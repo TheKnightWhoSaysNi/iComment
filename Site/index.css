@@ -5,10 +5,6 @@
     --header-color: rgba(255, 255, 255, 0.6);
 }
 
-html, body {
-    overflow-x: hidden; 
-}
-
 h1{
     font-family: Roboto, sans-serif;
     color: rgb(78, 78, 78);
@@ -39,7 +35,7 @@ section div{
 }
 
 #top input[type=radio] + label {
-    
+    filter: brightness(95%);
     flex-direction: column;
 }
 
@@ -61,16 +57,12 @@ section div{
 
 #top input[type=radio]:checked + label {
     z-index: 4;
-    transform: perspective(400px) rotateY(0deg) scale(1.1);
+    transform: perspective(400px) rotateY(0deg) scale(1);
     
-}
-#top input[type=radio]:checked + label #top1, #top2{
-    transform: perspective(400px) rotateY(0deg) scale(1.15);
-    filter: brightness(90%);
 }
 
 #top input[type=radio]:hover + label{
-    filter: brightness(110%);
+    filter: brightness(106%);
 }
 
 #top1{
@@ -78,7 +70,7 @@ section div{
     position: relative;
     left: 0px;
     z-index: 3;
-    transform: scale(1);
+    transform: scale(0.9);
 }
 
 #top2{
@@ -106,6 +98,7 @@ section div{
     margin-top: 20px;
     max-height: 310px;
     overflow: hidden;
+    padding-top: 5px;
 }
 
 #latestGames a{
@@ -121,8 +114,7 @@ section div{
 }
 #latestGames a img:hover{
     filter: brightness(110%);
-    width: 102%;
-    height: 102%;
+    transform: scale(1.01);
 }
 
 #latestGames button{

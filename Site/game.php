@@ -1,3 +1,11 @@
+<!-- 
+
+    game.php: page qui permet d'afficher les détails d'un jeu, de le télécharger, commenter et de le noter
+
+    on a un identifiant dans l'url, on charge les informations du jeu qui y correspond.
+
+-->
+
 <?php
 
     if(!isset($_SESSION)){ session_start(); } 
@@ -11,16 +19,29 @@
 
     require "includes/dbh.inc.php";
 
-    
+
+    if (isset($_POST["download"])){
+
+        $id = $_POST['download'];
+        $sql = "UPDATE games SET aDownloads = aDownloads+1 WHERE aId = $id";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)){
+            header("Location: ?error=sqlerror");
+
+        } else {
+            mysqli_stmt_execute($stmt);
+            header("Location: " . $_POST["path"]);
+        }
+    }
+
 
     // quand on vote pour un jeu
-
     if (isset($_POST["rate"])){
 
         function execute($conn, $sql){
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)){
-                header("Location: ../?error=sqlerror");
+                header("Location: ?error=sqlerror");
                 exit();
             } else {
                 mysqli_stmt_execute($stmt);
@@ -118,7 +139,7 @@
 
     
 
-    <form method="post" action="includes/download.inc.php" class="downloadBtn" >
+    <form method="post" action="game.php?id=" <?php echo $id ?> class="downloadBtn" >
         <input type="hidden" name="path" value=<?php echo $row["aFile"] ?> >
         <button type="submit" name="download" value=<?php echo $id ?> > <p>Download</p> </button>
     </form>

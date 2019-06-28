@@ -1,3 +1,12 @@
+<!-- 
+
+dbh.inc.php: database handler, on s'en sers pour établir une connexion entre le programme en php et la base de données SQL
+Comme on en a très souvent besoin on créé un unique fichier que l'on importe partout après
+
+Les identifiants sont différents selon si on est en local avec xampp ou en ligne, il faut donc les changer en fonction
+
+-->
+
 <?php
 
 if(in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1','::1'))){ // Si c'est effectué en local

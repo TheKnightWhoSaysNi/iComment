@@ -75,7 +75,7 @@
                     //print_r($row);
                     $console = $row["aConsole"];
                 ?>
-                    <a class="searchResults" href=<?php echo "site.php?n=" . $key ?> >
+                    <a class="searchResults" href=<?php echo "game.php?id=" . $key ?> >
                         <img src="<?php echo $row["aCover"] ?>" alt="game cover" class="gameCover" <?php cover_size($console, 100) ?> >
                         <div>
                             <h1>
