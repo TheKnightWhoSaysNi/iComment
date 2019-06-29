@@ -10,10 +10,12 @@
 
 <?php
 
+
+
     include 'includes/dbh.inc.php';
     include "consoles.php";
 
-    if(!isset($_SESSION)){ session_start(); }
+    if((!isset($_SESSION)) && (!isset($_POST["newUsername"])) ){ session_start(); }
 
     //on vérifie que l'utilisateur a bien confirmé son email
     else {
@@ -26,7 +28,7 @@
             mysqli_stmt_bind_param($stmt, "s", $_SESSION["userId"]);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
-            if (($rowEmail = mysqli_fetch_assoc($result)) && ($rowEmail["confirmed"] != "1") && (!isset($_GET["confirmEmail"]) ) ) {
+            if (($rowEmail = mysqli_fetch_assoc($result)) && ($rowEmail["confirmed"] != "1") && (!isset($_GET["confirmEmail"])) ) { // && (!isset($_POST["newUsername"])
                 header("Location: index.php?confirmEmail="); //si l'utilisateur a pas un compte vérifié on le redirige vers un url qui active la popup de verification
                 exit();
             }
@@ -161,10 +163,13 @@
 
         <form method="post" action="includes/login.inc.php">
             <input type="text" name="confirmationCode" placeholder="Confirmation code" value="<?php echo $confirmationCode ?>">
-            <button type="submit" name="confirmationCode-submit"> <p> Confirm </p> </button>
+            <div>
+                <h4>Check your spam inbox or type "lazy" to skip</h4>
+                <button type="submit" name="confirmationCode-submit"> <p> Confirm </p> </button>
+            </div>
         </form>
 
-        <h4>Check your spam inbox or type "lazy" to skip</h4>
+        
     </div>
 
     <?php 
@@ -185,6 +190,7 @@
         "consolenotsupported" => "Sorry we do not support this console yet",
         "accountNotVerified" => "Verify your account before you do anything else",
         "emailError" => "Failed sending the email, keep in mind that it won't work the website is running on a local server",
+        "usernameAlreadyChanged" => "You can only change your username once",
         "sqlerror" => "Something went wrong"
     );
     
@@ -195,7 +201,8 @@
         "post" => "Posted",
         "delCom" => "Post successfully deleted",
         "upload" => "Successfully uploaded",
-        "emailVerified" => "Successfully verified"
+        "emailVerified" => "Successfully verified",
+        "changedUsername" => "Your username was successfully changed, you may now login"
     );
 
     if(isset($_GET['error'])){
